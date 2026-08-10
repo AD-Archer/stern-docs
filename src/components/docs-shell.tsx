@@ -19,7 +19,7 @@ export type DocsShellProps = {
   search: SearchEntry[];
   /** The join panel, when there's a live program behind these docs. */
   panel?: React.ReactNode;
-  /** Round status and join CTA — one line in the header, at every width. */
+  /** Round status and join CTA  one line in the header, at every width. */
   status?: React.ReactNode;
   /** The page itself. */
   children: React.ReactNode;
@@ -29,7 +29,7 @@ export type DocsShellProps = {
  * The chrome around a documentation page: one header, one contents rail.
  *
  * Header and rail live in the same component because they share one piece of
- * state — whether the contents sheet is open on a phone — and because the header
+ * state  whether the contents sheet is open on a phone  and because the header
  * has to sit *outside* the two-column grid to span the viewport while the rail
  * sits inside it as the first column.
  *
@@ -39,7 +39,7 @@ export type DocsShellProps = {
  * and looked like a bug. The round now reports itself in a single line of the one
  * header there is.
  *
- * The rail: every page is a labelled port with a status LED, exactly one lit —
+ * The rail: every page is a labelled port with a status LED, exactly one lit
  * the page you're on, the same read as a rack. Colour is never the only signal;
  * the active row also gets a brand rail down its left edge and a weight change,
  * so it works without colour vision and under forced colours.
@@ -100,7 +100,11 @@ export function DocsShell({
       </header>
 
       <div className="shell__body">
-        <aside id="nav-rail" className="nav-rail panel" data-open={open ? "1" : "0"}>
+        <aside
+          id="nav-rail"
+          className="nav-rail panel"
+          data-open={open ? "1" : "0"}
+        >
           <DocSearch entries={search} />
 
           {panel}
@@ -114,7 +118,9 @@ export function DocsShell({
                     <li key={doc.href}>
                       <Link
                         href={doc.href}
-                        className={isActive(doc.href) ? "port port-active" : "port"}
+                        className={
+                          isActive(doc.href) ? "port port-active" : "port"
+                        }
                         aria-current={isActive(doc.href) ? "page" : undefined}
                         // Tapping a port on a phone means you found what you
                         // wanted, so the sheet has done its job.

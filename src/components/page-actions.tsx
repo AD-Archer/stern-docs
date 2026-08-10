@@ -6,8 +6,8 @@ import { useState } from "react";
  * What someone wants at the foot of a docs page: send it to a friend, hand it to
  * a model, or fix what's wrong with it.
  *
- * "Copy as Markdown" copies the page's original source — the same text a
- * contributor edits and the same text `/raw/…` serves — because pasting rendered
+ * "Copy as Markdown" copies the page's original source  the same text a
+ * contributor edits and the same text `/raw/…` serves  because pasting rendered
  * HTML into a model wastes context on markup, and pasting a *link* only works if
  * the thing on the other end can browse. The markdown is already in the payload,
  * so the copy is instant and works offline.
@@ -65,7 +65,12 @@ export function PageActions({
         View source ↗
       </a>
       {editUrl ? (
-        <a className="btn btn-ghost" href={editUrl} target="_blank" rel="noreferrer">
+        <a
+          className="btn btn-ghost"
+          href={editUrl}
+          target="_blank"
+          rel="noreferrer"
+        >
           Suggest an edit ↗
         </a>
       ) : null}

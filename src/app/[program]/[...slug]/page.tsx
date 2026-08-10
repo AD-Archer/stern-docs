@@ -58,8 +58,8 @@ export default async function DocPage({ params }: Params) {
   if (!content) notFound();
 
   const doc = findDoc(content, slug);
-  // Hidden docs are reachable by direct link on purpose — a draft can be shared
-  // for review without appearing in the nav — but they never show up in search.
+  // Hidden docs are reachable by direct link on purpose  a draft can be shared
+  // for review without appearing in the nav  but they never show up in search.
   if (!doc) notFound();
 
   return <DocView content={content} doc={doc} />;

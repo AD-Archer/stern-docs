@@ -2,7 +2,7 @@ import { listPrograms } from "@/lib/content";
 import { buildIndex, TEXT_HEADERS } from "@/lib/llms";
 
 /**
- * `/llms.txt` — the llmstxt.org-shaped index of everything here.
+ * `/llms.txt`  the llmstxt.org-shaped index of everything here.
  *
  * At the site root because that's where agents and crawlers look for it, the same
  * way they look for /robots.txt.

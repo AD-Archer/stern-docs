@@ -2,13 +2,13 @@
  * Reads a program's brand colors out of its own artwork.
  *
  * The program's logo and background live on Hack Club's CDN and are the things
- * an organiser actually iterates on — swapping the banner for a new one is how a
+ * an organiser actually iterates on  swapping the banner for a new one is how a
  * round changes its look. So the docs derive their palette from those images
  * rather than from a hex value someone has to remember to keep in sync.
  *
  * How the two colors are chosen:
  *
- *  - Pixels are downsampled hard (48px longest edge — this is a color question,
+ *  - Pixels are downsampled hard (48px longest edge  this is a color question,
  *    not a detail question), converted to OKLCH, and near-neutral or
  *    near-black/near-white pixels are discarded. Logos are mostly flat white or
  *    transparent; those pixels carry no identity.
@@ -19,7 +19,7 @@
  *    the companion color used by the status strip and LED glow.
  *
  * Everything is best-effort. An image that 404s, a sharp binary that won't load
- * on the host, an all-grey logo — each falls back to the program's declared
+ * on the host, an all-grey logo  each falls back to the program's declared
  * accentColor, and then to a fixed default. A docs page never fails to render
  * because color extraction had a bad day.
  */
@@ -27,15 +27,20 @@
 import { clamp, hueDistance, oklchToHex, rgbToOklch } from "@/lib/color";
 
 /** One hue family found in an image. */
-type Swatch = { hue: number; lightness: number; chroma: number; weight: number };
+type Swatch = {
+  hue: number;
+  lightness: number;
+  chroma: number;
+  weight: number;
+};
 
-const BIN_COUNT = 24; // 15° per bin — wide enough that dithering lands together.
+const BIN_COUNT = 24; // 15° per bin  wide enough that dithering lands together.
 const MAX_BYTES = 8 * 1024 * 1024;
 const TTL_MS = 60 * 60 * 1000;
 
 /**
  * Per-URL result cache. Extraction is pure for a given URL and the answer is
- * two hex strings, so a process-local map is the whole caching story — no data
+ * two hex strings, so a process-local map is the whole caching story  no data
  * cache entry holding megabytes of PNG, and nothing to invalidate but time.
  */
 const cache = new Map<string, { at: number; swatches: Swatch[] }>();
@@ -97,7 +102,8 @@ async function extractSwatches(url: string): Promise<Swatch[]> {
     // Greys carry no hue, and the extremes are page background and highlight.
     if (c < 0.03 || l < 0.12 || l > 0.95) continue;
 
-    const bin = bins[Math.min(BIN_COUNT - 1, Math.floor((h / 360) * BIN_COUNT))];
+    const bin =
+      bins[Math.min(BIN_COUNT - 1, Math.floor((h / 360) * BIN_COUNT))];
     // Vividness weighting: a pixel's vote scales with its own chroma, so the
     // brand mark beats a big wash of desaturated background.
     const weight = c;
@@ -131,7 +137,11 @@ async function extractSwatches(url: string): Promise<Swatch[]> {
 }
 
 const asHex = (s: Swatch) =>
-  oklchToHex(clamp(s.lightness, 0.42, 0.75), clamp(s.chroma, 0.05, 0.19), s.hue);
+  oklchToHex(
+    clamp(s.lightness, 0.42, 0.75),
+    clamp(s.chroma, 0.05, 0.19),
+    s.hue,
+  );
 
 /** A swatch has to be this present and this colorful before it may set the theme. */
 const isConvincing = (s: Swatch) => s.chroma >= 0.06 && s.weight >= 0.015;
@@ -155,7 +165,8 @@ export async function extractProgramColors(
     secondaryUrl ? loadSwatches(secondaryUrl) : Promise.resolve([]),
   ]);
 
-  const brandSwatch = primary.find(isConvincing) ?? secondary.find(isConvincing);
+  const brandSwatch =
+    primary.find(isConvincing) ?? secondary.find(isConvincing);
   if (!brandSwatch) return { brand: null, secondary: null };
 
   // The companion: the most present hue, from either image, that's far enough

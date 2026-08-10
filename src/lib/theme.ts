@@ -7,7 +7,7 @@
  * surfaces have to look like one product, and matching the *algorithm* keeps
  * them agreeing even after either side changes its brand color.
  *
- * On top of that sit the tokens only the docs need — the panel/hairline/LED
+ * On top of that sit the tokens only the docs need  the panel/hairline/LED
  * language of the sidebar and header. Those are derived from the same seed hue,
  * so a program's docs feel like its own equipment rather than a grey chrome
  * with a colored button in it.
@@ -28,7 +28,7 @@ export type ThemeSeed = {
   brand: string;
   /** Second color for the status strip gradient and LED glow. */
   secondary: string;
-  /** Where the colors came from — surfaced in the theme debug route. */
+  /** Where the colors came from  surfaced in the theme debug route. */
   source: "images" | "accent" | "fallback" | "override";
 };
 
@@ -66,7 +66,11 @@ export function generateTokens(seed: ThemeSeed): ThemeVars {
     "--ring": primary,
     // The brand pair, kept raw for the header seam, LEDs and glows.
     "--brand": oklch(accentL, accentC, h),
-    "--brand-2": oklch(clamp(second.l, 0.5, 0.78), Math.max(second.c, 0.05), h2),
+    "--brand-2": oklch(
+      clamp(second.l, 0.5, 0.78),
+      Math.max(second.c, 0.05),
+      h2,
+    ),
 
     "--background": oklch(0.975, tint(0.01), h),
     "--foreground": oklch(0.2, tint(0.024), h),
@@ -123,7 +127,11 @@ export function ogColors(seed: ThemeSeed) {
     panel: oklchToHex(0.995, tint(0.006), brand.h),
     foreground: oklchToHex(0.2, tint(0.024), brand.h),
     muted: oklchToHex(0.46, tint(0.024), brand.h),
-    brand: oklchToHex(clamp(brand.l, 0.45, 0.72), Math.max(brand.c, 0.05), brand.h),
+    brand: oklchToHex(
+      clamp(brand.l, 0.45, 0.72),
+      Math.max(brand.c, 0.05),
+      brand.h,
+    ),
     brand2: oklchToHex(
       clamp(second.l, 0.5, 0.78),
       Math.max(second.c, 0.05),

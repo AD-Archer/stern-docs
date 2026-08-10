@@ -3,13 +3,13 @@
  *
  * Precedence, most deliberate first:
  *
- *  1. `theme.brand` in the program's docs.json — someone looked at the result,
+ *  1. `theme.brand` in the program's docs.json  someone looked at the result,
  *     disagreed, and wrote down what they wanted.
  *  2. **stern's `accentColor`.** This is the program's declared brand colour, set
  *     by whoever runs it, and it's what the program's own stern pages already
- *     wear — so the docs match rather than approximate. CloudFall's `#543efa`
+ *     wear  so the docs match rather than approximate. CloudFALL's `#543efa`
  *     makes purple docs; Future's `#51b9e6` makes blue ones.
- *  3. The program's artwork, when no accent is set — the logo and background are
+ *  3. The program's artwork, when no accent is set  the logo and background are
  *     the only other statement of intent available.
  *  4. Hack Club red, so a brand-new program with nothing filled in still looks
  *     like it belongs to something.
@@ -26,7 +26,7 @@ import type { Program, ProgramImages } from "@/lib/program";
 import type { ThemeSeed } from "@/lib/theme";
 import type { DocsConfig } from "@/lib/content";
 
-/** Hack Club red — the "we know nothing about this program yet" color. */
+/** Hack Club red  the "we know nothing about this program yet" color. */
 const FALLBACK_BRAND = "#ec3750";
 
 /** A companion has to be this far from the brand to read as a second colour. */
@@ -47,9 +47,10 @@ function rotateHue(hex: string, degrees: number): string {
 }
 
 const farEnough = (candidate: string, brand: string) =>
-  hueDistance(hexToOklch(candidate).h, hexToOklch(brand).h) >= MIN_COMPANION_HUE_GAP;
+  hueDistance(hexToOklch(candidate).h, hexToOklch(brand).h) >=
+  MIN_COMPANION_HUE_GAP;
 
-/** Which image the brand colour is read from. Logo first — it's the brand mark. */
+/** Which image the brand colour is read from. Logo first  it's the brand mark. */
 function imagesForExtraction(
   images: ProgramImages,
   preferred: string | undefined,
@@ -128,9 +129,11 @@ export async function resolveThemeSeed(
     return { brand: accent, secondary: companion, source: "accent" };
   }
 
-  return fromArtwork() ?? {
-    brand: FALLBACK_BRAND,
-    secondary: rotateHue(FALLBACK_BRAND, 38),
-    source: "fallback",
-  };
+  return (
+    fromArtwork() ?? {
+      brand: FALLBACK_BRAND,
+      secondary: rotateHue(FALLBACK_BRAND, 38),
+      source: "fallback",
+    }
+  );
 }

@@ -14,7 +14,7 @@ export type ScheduleState = {
   phase: SchedulePhase;
   /** Whole days remaining, rounded up so the last partial day reads as "1". */
   daysLeft: number | null;
-  /** Hours remaining after whole days are taken out — for the live countdown. */
+  /** Hours remaining after whole days are taken out  for the live countdown. */
   hoursLeft: number | null;
   minutesLeft: number | null;
   /** Terse status for the strip: "88 days left", "Opens Aug 5", "Closed". */

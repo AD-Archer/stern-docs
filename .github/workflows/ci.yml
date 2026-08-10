@@ -2,7 +2,7 @@ name: CI
 
 # Every docs pull request gets built. A typo in frontmatter, a `group` that
 # doesn't exist, or markdown that breaks the render should fail here rather than
-# on the live site — contributors editing a file on github.com can't run the
+# on the live site  contributors editing a file on github.com can't run the
 # build themselves.
 on:
   push:

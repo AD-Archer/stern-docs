@@ -7,7 +7,7 @@ import type { Heading } from "@/lib/markdown";
  * The right rail: where you are inside a page, tracked with an IntersectionObserver
  * rather than a scroll handler so it costs nothing while scrolling.
  *
- * Only renders with two or more headings — on a short page it would be a rail
+ * Only renders with two or more headings  on a short page it would be a rail
  * pointing at the thing already on screen.
  */
 export function OnThisPage({ headings }: { headings: Heading[] }) {

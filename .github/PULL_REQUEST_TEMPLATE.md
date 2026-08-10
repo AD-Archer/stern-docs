@@ -4,8 +4,8 @@
 
 ## Checklist
 
-- [ ] The page still renders (`pnpm dev`, or trust CI — it builds every PR)
-- [ ] No dates or deadlines hardcoded in prose — those come from the program itself
+- [ ] The page still renders (`pnpm dev`, or trust CI it builds every PR)
+- [ ] No dates or deadlines hardcoded in prose those come from the program itself
 - [ ] Frontmatter `group` matches a section `id` in that program's `docs.json`
 - [ ] Commands and ports are ones you've actually run
 

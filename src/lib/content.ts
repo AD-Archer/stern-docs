@@ -3,7 +3,7 @@
  * site with no database and no CMS.
  *
  *   content/
- *     cloudfall/
+ *     CloudFALL/
  *       docs.json        ← per-program config: title, section order, links
  *       index.md         ← the program's docs home
  *       getting-started.md
@@ -13,7 +13,7 @@
  * That shape *is* the contribution model. A person who spots a wrong port number
  * edits one markdown file on github.com and opens a pull request; nothing here
  * needs to know that happened. It also means adding a whole new program's docs
- * is `mkdir content/<slug>` — the routes, nav, theme and round status are all
+ * is `mkdir content/<slug>`  the routes, nav, theme and round status are all
  * derived from the folder name plus stern's API.
  *
  * Read from disk on the server only. Pages are ISR-cached, so this runs on
@@ -27,7 +27,7 @@ import matter from "gray-matter";
 const CONTENT_ROOT = path.join(process.cwd(), "content");
 
 export type DocsConfig = {
-  /** Display title of this docs site, e.g. "CloudFall docs". */
+  /** Display title of this docs site, e.g. "CloudFALL docs". */
   title: string;
   /** One line under the title in the sidebar. */
   tagline?: string;
@@ -47,7 +47,7 @@ export type DocsConfig = {
     source?: "accent" | "images";
     sourceImage?: "logo" | "background" | "banner" | "cover";
   };
-  /** Extra links in the sidebar footer — Slack, the program site, source. */
+  /** Extra links in the sidebar footer  Slack, the program site, source. */
   links?: { label: string; href: string }[];
   /** `owner/repo` for edit links; falls back to NEXT_PUBLIC_CONTENT_REPO. */
   repo?: string;
@@ -140,9 +140,13 @@ function parseDoc(program: string, absolute: string, raw: string): Doc {
   const file = relative[relative.length - 1].replace(/\.md$/, "");
   // index.md is the folder's own page: content/x/index.md → /x, and
   // content/x/guides/index.md → /x/guides.
-  const segments = file === "index" ? relative.slice(0, -1) : [...relative.slice(0, -1), file];
+  const segments =
+    file === "index" ? relative.slice(0, -1) : [...relative.slice(0, -1), file];
 
-  const fallbackTitle = segments.length === 0 ? "Overview" : titleize(segments[segments.length - 1]);
+  const fallbackTitle =
+    segments.length === 0
+      ? "Overview"
+      : titleize(segments[segments.length - 1]);
 
   return {
     segments,
@@ -219,7 +223,10 @@ export async function loadProgramContent(
   return { program, config, docs, nav, flat };
 }
 
-export function findDoc(content: ProgramContent, segments: string[]): Doc | null {
+export function findDoc(
+  content: ProgramContent,
+  segments: string[],
+): Doc | null {
   const target = segments.join("/");
   return content.docs.find((doc) => doc.segments.join("/") === target) ?? null;
 }
@@ -231,7 +238,10 @@ export function neighbours(content: ProgramContent, doc: Doc) {
   );
   return {
     previous: index > 0 ? content.flat[index - 1] : null,
-    next: index >= 0 && index < content.flat.length - 1 ? content.flat[index + 1] : null,
+    next:
+      index >= 0 && index < content.flat.length - 1
+        ? content.flat[index + 1]
+        : null,
   };
 }
 

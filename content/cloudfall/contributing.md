@@ -6,20 +6,17 @@ order: 2
 ---
 
 If a page here is wrong, unclear, or missing the thing you spent an hour working
-out, you can fix it. You don't need to be a maintainer and you don't need to
-clone anything.
+out, you can fix it.
 
-These docs live in one public repo — **[AD-Archer/sterndocs](https://github.com/AD-Archer/sterndocs)** — alongside the docs
-for every other Hack Club program on the same platform. It's markdown and a small
-Next.js site, nothing else, so a documentation fix never touches program
-infrastructure.
+These docs live in one public repo **[AD-Archer/sterndocs](https://github.com/AD-Archer/sterndocs)** alongside the docs
+for every other Archer program on Stern. It's markdown inside of a content folder.
 
 ## The fast way, from the browser
 
 1. Scroll to the bottom of the page that's wrong.
 2. Click **Suggest an edit**. GitHub opens that page's markdown file in an editor.
 3. Make the change. If you don't have write access, GitHub forks the repo for you
-   automatically — that's expected.
+   automatically that's expected.
 4. Write one line about what you changed and click **Propose changes**, then
    **Create pull request**.
 
@@ -34,7 +31,7 @@ pnpm install
 pnpm dev            # http://localhost:3000
 ```
 
-CloudFall's pages live in `content/cloudfall/`, and every other program has a
+CloudFALL's pages live in `content/cloudfall/`, and every other program has a
 folder beside it. Edit a `.md` file, save, and the page reloads.
 
 ## What a page looks like
@@ -50,13 +47,13 @@ order: 1
 Body text, in markdown.
 ```
 
-| Field | What it does |
-| --- | --- |
-| `title` | Heading, sidebar label, browser tab, share card |
-| `description` | The lede under the title, plus search and social previews |
-| `group` | Which section of the sidebar it appears in — must match an `id` in `docs.json` |
-| `order` | Position within the section; ties break alphabetically |
-| `hidden` | `true` keeps it out of the nav and search, but the URL still works — good for a draft you want to share for review |
+| Field         | What it does                                                                                                     |
+| ------------- | ---------------------------------------------------------------------------------------------------------------- |
+| `title`       | Heading, sidebar label, browser tab, share card                                                                  |
+| `description` | The lede under the title, plus search and social previews                                                        |
+| `group`       | Which section of the sidebar it appears in must match an `id` in `docs.json`                                     |
+| `order`       | Position within the section; ties break alphabetically                                                           |
+| `hidden`      | `true` keeps it out of the nav and search, but the URL still works good for a draft you want to share for review |
 
 Filenames become URLs: `content/cloudfall/getting-started.md` is
 `/cloudfall/getting-started`. A folder's `index.md` is the folder's own page.
@@ -84,9 +81,9 @@ services:
 ```
 ````
 
-Tables, task lists, footnotes — anything GitHub-flavoured markdown supports.
+Tables, task lists, footnotes anything GitHub-flavoured markdown supports.
 
-## House style
+## A few notes
 
 - **Write for the person who's stuck**, not for the person who already knows.
 - **Be specific.** Port numbers, exact commands, real file names.
@@ -97,5 +94,5 @@ Tables, task lists, footnotes — anything GitHub-flavoured markdown supports.
 ## Adding a whole new program's docs
 
 Make a folder under `content/`, add a `docs.json` and an `index.md`, and the
-site does the rest — routes, navigation, search, share cards, and a palette
+site does the rest routes, navigation, search, share cards, and a palette
 pulled from that program's own artwork.

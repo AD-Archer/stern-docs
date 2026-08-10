@@ -2,11 +2,11 @@ import { listPrograms } from "@/lib/content";
 import { buildFullText, TEXT_HEADERS } from "@/lib/llms";
 
 /**
- * `/llms-full.txt` — every page's markdown in one response, for pasting into a
+ * `/llms-full.txt`  every page's markdown in one response, for pasting into a
  * model or handing to an agent that would otherwise crawl eleven URLs.
  *
  * `?program=<slug>` narrows it to one program, which is the common case: someone
- * asking questions about CloudFall doesn't need Future's rules in the context
+ * asking questions about CloudFALL doesn't need Future's rules in the context
  * window alongside them.
  */
 export const revalidate = 300;

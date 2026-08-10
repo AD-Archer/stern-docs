@@ -28,7 +28,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
 }
 
 /**
- * The docs home. Renders content/<program>/index.md, then the section index —
+ * The docs home. Renders content/<program>/index.md, then the section index
  * on a landing page the fastest thing you can give someone is the shape of the
  * whole manual.
  */
@@ -46,7 +46,9 @@ export default async function ProgramHome({ params }: Params) {
         {content.nav.map((group) => (
           <section className="section-card panel" key={group.id}>
             <h2 className="silkscreen">{group.label}</h2>
-            {group.blurb ? <p className="section-card__blurb">{group.blurb}</p> : null}
+            {group.blurb ? (
+              <p className="section-card__blurb">{group.blurb}</p>
+            ) : null}
             <ul>
               {group.docs.map((doc) => (
                 <li key={doc.href}>
@@ -55,7 +57,9 @@ export default async function ProgramHome({ params }: Params) {
                     <span>
                       <span className="section-link__title">{doc.title}</span>
                       {doc.description ? (
-                        <span className="section-link__desc">{doc.description}</span>
+                        <span className="section-link__desc">
+                          {doc.description}
+                        </span>
                       ) : null}
                     </span>
                   </Link>

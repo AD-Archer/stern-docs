@@ -18,7 +18,7 @@ type Hit = SearchEntry & { score: number; snippet: string };
  * Search over a prebuilt index shipped with the page.
  *
  * A program's docs are tens of pages, not thousands, so the entire corpus is
- * smaller than one search-service round trip — there's no API route, no index
+ * smaller than one search-service round trip  there's no API route, no index
  * build step and no third-party script, and it works inside an embed where a
  * cross-origin search request often wouldn't.
  */
@@ -31,7 +31,11 @@ function score(entry: SearchEntry, tokens: string[]): number {
   for (const token of tokens) {
     // Every token has to appear somewhere, so "devlog hours" doesn't match a
     // page that only knows about hours.
-    if (!title.includes(token) && !description.includes(token) && !text.includes(token)) {
+    if (
+      !title.includes(token) &&
+      !description.includes(token) &&
+      !text.includes(token)
+    ) {
       return 0;
     }
     if (title.startsWith(token)) total += 12;
@@ -71,7 +75,7 @@ export function DocSearch({ entries }: { entries: SearchEntry[] }) {
   }, [entries, query]);
 
   // Opening and closing both reset the query, done at the call sites rather than
-  // in an effect watching `open` — same result, one render instead of two.
+  // in an effect watching `open`  same result, one render instead of two.
   const openPanel = () => {
     setQuery("");
     setCursor(0);
@@ -103,11 +107,7 @@ export function DocSearch({ entries }: { entries: SearchEntry[] }) {
 
   return (
     <>
-      <button
-        type="button"
-        className="search-trigger"
-        onClick={openPanel}
-      >
+      <button type="button" className="search-trigger" onClick={openPanel}>
         <span>Search docs</span>
         <kbd className="tabular">⌘K</kbd>
       </button>
@@ -159,7 +159,9 @@ export function DocSearch({ entries }: { entries: SearchEntry[] }) {
                   <button
                     type="button"
                     className={
-                      index === cursor ? "search-hit search-hit-active" : "search-hit"
+                      index === cursor
+                        ? "search-hit search-hit-active"
+                        : "search-hit"
                     }
                     onMouseEnter={() => setCursor(index)}
                     onClick={() => go(hit.href)}

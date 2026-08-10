@@ -3,7 +3,7 @@ import type { NextConfig } from "next";
 /**
  * This site exists to be framed. Every page is embeddable, so framing is
  * allowed globally rather than on one opt-in route the way stern does it for
- * /rudder — but the rest of the header set stays strict, because "anyone may
+ * /rudder  but the rest of the header set stays strict, because "anyone may
  * frame us" is the only concession being made here.
  */
 const EMBEDDABLE_HEADERS = [

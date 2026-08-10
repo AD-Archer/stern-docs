@@ -5,7 +5,7 @@
  * this listens for that and resizes the iframe, so an embedded manual never has
  * its own scrollbar inside somebody else's page.
  *
- * Usage — put this anywhere in the host page:
+ * Usage  put this anywhere in the host page:
  *
  *   <div data-stern-docs="https://docs.example.com/cloudfall"></div>
  *   <script src="https://docs.example.com/embed.js" defer></script>
@@ -61,7 +61,8 @@
 
   window.addEventListener("message", function (event) {
     var data = event.data;
-    if (!data || data.type !== MESSAGE || typeof data.height !== "number") return;
+    if (!data || data.type !== MESSAGE || typeof data.height !== "number")
+      return;
 
     for (var i = 0; i < frames.length; i++) {
       // Match on the sending window, not just the origin: a page may embed more

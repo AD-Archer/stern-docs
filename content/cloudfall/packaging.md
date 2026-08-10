@@ -6,9 +6,8 @@ order: 2
 ---
 
 Every submission has to be something a reviewer can open and use. For a website
-that's a live link. For a self-hosted project — which most CloudFall projects are
-— it's **a public repo and a Docker container**, so the reviewer can start it on
-their own machine.
+that's a live link. For a self-hosted project which most CloudFALL projects are it's **a public repo and a Docker container**, so the reviewer can start it on
+their own machine. Minor expections for things like homelabs with extensions, things like custom UPS, antenna, etc
 
 ## The minimum
 
@@ -21,10 +20,7 @@ cp .env.example .env      # if you need config at all
 docker compose up -d
 # open http://localhost:PORT
 ```
-
-Four commands, no guesswork about which branch, no "message me for the env
-file". If your README's setup section is longer than a screen, that's the thing
-to fix before you submit.
+If your README's setup section is longer than a screen, that's may be a bad sign.
 
 ## A Dockerfile that works from a clean clone
 
@@ -55,7 +51,7 @@ services:
     restart: unless-stopped
 ```
 
-Then verify it the way a reviewer will — from a fresh clone, in a directory you
+Then verify it the way a reviewer will from a fresh clone, in a directory you
 haven't been developing in:
 
 ```bash
@@ -67,9 +63,9 @@ That catches the file you never committed, which is the single most common reaso
 a project comes back.
 
 > [!WARNING]
-> Don't commit secrets. Ship `.env.example` with the *names* of the variables and
+> Don't commit secrets. Ship `.env.example` with the _names_ of the variables and
 > obviously-fake values, and keep the real `.env` in `.gitignore`. If a key has
-> ever been committed, rotate it — deleting the line doesn't remove it from
+> ever been committed, rotate it deleting the line doesn't remove it from
 > history.
 
 ## The README a reviewer wants
@@ -83,6 +79,5 @@ a project comes back.
 
 ## Hosted, not self-hosted?
 
-If your project is a website with a live URL, that URL is your "it runs" — but
-still ship the repo and keep it public. Free tiers that sleep are fine as long as
-they wake up; check the link yourself the day you submit.
+If your project is a website with a live URL, that URL is your "it runs" but
+still ship the repo and keep it public.

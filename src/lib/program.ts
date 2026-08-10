@@ -26,7 +26,7 @@ export type Program = {
   slug: string;
   name: string;
   description: string | null;
-  /** "online" | "in-person" | whatever stern adds later — displayed verbatim. */
+  /** "online" | "in-person" | whatever stern adds later  displayed verbatim. */
   format: string | null;
   projectTypes: string[];
   slackChannel: string | null;
@@ -49,7 +49,9 @@ const num = (value: unknown): number | null =>
   typeof value === "number" && Number.isFinite(value) ? value : null;
 
 const strArray = (value: unknown): string[] =>
-  Array.isArray(value) ? value.filter((v): v is string => typeof v === "string") : [];
+  Array.isArray(value)
+    ? value.filter((v): v is string => typeof v === "string")
+    : [];
 
 function asRecord(value: unknown): Record<string, unknown> {
   return typeof value === "object" && value !== null
@@ -107,7 +109,7 @@ export async function fetchProgram(slug: string): Promise<Program | null> {
     if (!response.ok) return null;
     return parseProgram(await response.json(), slug);
   } catch {
-    // Offline dev, stern deploying, DNS hiccup — the docs still have to render.
+    // Offline dev, stern deploying, DNS hiccup  the docs still have to render.
     return null;
   }
 }

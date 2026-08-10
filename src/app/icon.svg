@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
   <!-- A panel with one lit port: the same idea the whole site is built on.
        Static, in Hack Club red, for the pages that have no program behind them
-       (/embed, 404). Inside a program, the tab wears that program's logo — see
+       (/embed, 404). Inside a program, the tab wears that program's logo  see
        generateMetadata in app/[program]/layout.tsx. -->
   <rect width="32" height="32" rx="5" fill="#17110f" />
   <rect x="6" y="9" width="20" height="2.5" rx="1.25" fill="#ec3750" opacity="0.9" />

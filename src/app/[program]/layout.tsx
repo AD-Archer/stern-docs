@@ -23,7 +23,7 @@ import {
  * the search index.
  *
  * Content comes from disk, liveness comes from stern's public API, and the two
- * are deliberately independent — if the API is unreachable the round status and
+ * are deliberately independent  if the API is unreachable the round status and
  * join panel simply aren't rendered, and the documentation is unaffected.
  */
 export const revalidate = 300;
@@ -93,7 +93,7 @@ export default async function ProgramLayout({
 
   return (
     <div className="shell">
-      {/* Generated per program from its own artwork — see lib/seed.ts. */}
+      {/* Generated per program from its own artwork  see lib/seed.ts. */}
       <style dangerouslySetInnerHTML={{ __html: themeCss(seed) }} />
       <EmbedBridge />
 
@@ -152,7 +152,7 @@ export default async function ProgramLayout({
 
       <footer className="site-foot site-only">
         {/* Whose program this is, who made the docs, and where to change them.
-            Not .silkscreen — that uppercases, which mangles a repo path and is
+            Not .silkscreen  that uppercases, which mangles a repo path and is
             the wrong way to write a name. */}
         <p className="site-foot__text">
           A{" "}
@@ -164,7 +164,12 @@ export default async function ProgramLayout({
             {AUTHOR_NAME}
           </a>
           . Edit on{" "}
-          <a className="tabular" href={CONTENT_REPO_URL} target="_blank" rel="noreferrer">
+          <a
+            className="tabular"
+            href={CONTENT_REPO_URL}
+            target="_blank"
+            rel="noreferrer"
+          >
             {CONTENT_REPO}
           </a>
           .

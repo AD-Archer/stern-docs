@@ -20,7 +20,7 @@ export type JoinPanelProps = {
 /**
  * Everything about the round that doesn't fit in the header.
  *
- * The header says how long is left and offers the way in — one line, seen on
+ * The header says how long is left and offers the way in  one line, seen on
  * every page. This is where the pitch and the spec live: what kind of thing this
  * is, what you're allowed to build, how much has been shipped, where the channel
  * is.
@@ -60,13 +60,19 @@ export function JoinPanel({
 
       {ended ? (
         <p className="join-panel__blurb">
-          {programName} finished{end ? ` on ${archiveDate(end)}` : ""}. Nothing new
-          is being accepted, but everything here still describes how it worked.
+          {programName} finished{end ? ` on ${archiveDate(end)}` : ""}. Nothing
+          new is being accepted, but everything here still describes how it
+          worked.
         </p>
       ) : (
         <>
           {blurb ? <p className="join-panel__blurb">{blurb}</p> : null}
-          <a className="btn btn-primary w-full justify-center" href={joinUrl} target="_blank" rel="noreferrer">
+          <a
+            className="btn btn-primary w-full justify-center"
+            href={joinUrl}
+            target="_blank"
+            rel="noreferrer"
+          >
             {joinLabel}
           </a>
         </>

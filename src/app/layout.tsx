@@ -1,12 +1,16 @@
 import type { Metadata } from "next";
-import { IBM_Plex_Mono, IBM_Plex_Sans, IBM_Plex_Sans_Condensed } from "next/font/google";
+import {
+  IBM_Plex_Mono,
+  IBM_Plex_Sans,
+  IBM_Plex_Sans_Condensed,
+} from "next/font/google";
 import { BOOT_SCRIPT } from "@/lib/boot-script";
 import { AUTHOR_NAME, AUTHOR_URL, SITE_URL } from "@/lib/site";
 import "./globals.css";
 
 /**
  * IBM Plex, in three voices. Plex was drawn for machines and their manuals, and
- * this whole site is a manual for machines people run themselves — the
+ * this whole site is a manual for machines people run themselves  the
  * condensed cut does the silkscreened panel labels, the mono does readouts and
  * code, and the sans carries the prose. One family keeps a program's docs
  * coherent no matter which brand color the artwork hands it.

@@ -57,7 +57,9 @@ function remarkCallouts() {
       // whitespace goes: this text node is often followed by inline markup
       // ("… paste it in **#channel** and …"), and trimming its tail would weld
       // the two words together.
-      const rest = [match[2], ...lines.slice(1)].join("\n").replace(/^[ \t]+/, "");
+      const rest = [match[2], ...lines.slice(1)]
+        .join("\n")
+        .replace(/^[ \t]+/, "");
       const soleChild = (first as Paragraph).children.length === 1;
       leading.value = soleChild ? rest.trim() : rest;
       if (leading.value === "" && soleChild) {
@@ -67,7 +69,9 @@ function remarkCallouts() {
       node.data = {
         ...node.data,
         hName: "aside",
-        hProperties: { className: ["callout", `callout-${kind.toLowerCase()}`] },
+        hProperties: {
+          className: ["callout", `callout-${kind.toLowerCase()}`],
+        },
       };
       node.children.unshift({
         type: "paragraph",
@@ -83,7 +87,8 @@ function rehypeCollectHeadings(headings: Heading[]) {
   return (tree: HastRoot) => {
     visit(tree, "element", (node: Element) => {
       if (node.tagName !== "h2" && node.tagName !== "h3") return;
-      const id = typeof node.properties?.id === "string" ? node.properties.id : "";
+      const id =
+        typeof node.properties?.id === "string" ? node.properties.id : "";
       if (!id) return;
       headings.push({
         depth: node.tagName === "h2" ? 2 : 3,
@@ -97,7 +102,7 @@ function rehypeCollectHeadings(headings: Heading[]) {
 /**
  * Two things content authors shouldn't have to think about: wide tables need
  * their own scroll container so the page body never scrolls sideways, and links
- * that leave the docs should say so — especially in an embed, where a link
+ * that leave the docs should say so  especially in an embed, where a link
  * replacing the iframe's contents is a dead end.
  */
 function rehypePolish() {
@@ -122,7 +127,11 @@ function rehypePolish() {
       }
 
       if (node.tagName === "img") {
-        node.properties = { ...node.properties, loading: "lazy", decoding: "async" };
+        node.properties = {
+          ...node.properties,
+          loading: "lazy",
+          decoding: "async",
+        };
       }
 
       if (node.tagName === "table" && parent && typeof index === "number") {
@@ -151,7 +160,10 @@ const processor = (headings: Heading[]) =>
     .use(rehypeCollectHeadings, headings)
     .use(rehypeAutolinkHeadings, {
       behavior: "append",
-      properties: { className: ["heading-anchor"], ariaLabel: "Link to section" },
+      properties: {
+        className: ["heading-anchor"],
+        ariaLabel: "Link to section",
+      },
       content: { type: "text", value: "#" },
     })
     .use(rehypePrettyCode, {
@@ -176,5 +188,7 @@ export async function renderMarkdown(
 /** Prose with the syntax taken out, for search snippets. */
 export function plainText(markdown: string): string {
   const tree = unified().use(remarkParse).use(remarkGfm).parse(markdown);
-  return mdastToString(tree as MdastRoot).replace(/\s+/g, " ").trim();
+  return mdastToString(tree as MdastRoot)
+    .replace(/\s+/g, " ")
+    .trim();
 }

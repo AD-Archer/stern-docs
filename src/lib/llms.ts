@@ -2,7 +2,7 @@
  * The machine-readable face of the docs.
  *
  * Three surfaces, all plain text, all built from the same markdown a contributor
- * edits — so there's no second copy of the content to drift:
+ * edits  so there's no second copy of the content to drift:
  *
  *   /llms.txt                  an index: every program, every page, one line each
  *   /llms-full.txt             every page's full markdown, concatenated
@@ -82,8 +82,11 @@ function programHeader(
   return lines.filter(Boolean).join("\n");
 }
 
-/** `/llms.txt` — the index. */
-export async function buildIndex(programs: string[], now: number): Promise<string> {
+/** `/llms.txt`  the index. */
+export async function buildIndex(
+  programs: string[],
+  now: number,
+): Promise<string> {
   const sections = await Promise.all(
     programs.map(async (slug) => {
       const content = await loadProgramContent(slug);
@@ -110,7 +113,7 @@ export async function buildIndex(programs: string[], now: number): Promise<strin
   return [
     "# Hack Club program documentation",
     "",
-    `> Participant documentation for Hack Club (https://hackclub.com) YSWS programs, maintained in the open at ${CONTENT_REPO_URL}. Every link below returns the page's original markdown. Program status and dates are generated at request time from stern (https://stern.hackclub.com), not written into the prose — trust the status line over anything a page implies about timing.`,
+    `> Participant documentation for Hack Club (https://hackclub.com) YSWS programs, maintained in the open at ${CONTENT_REPO_URL}. Every link below returns the page's original markdown. Program status and dates are generated at request time from stern (https://stern.hackclub.com), not written into the prose  trust the status line over anything a page implies about timing.`,
     "",
     sections.filter(Boolean).join("\n\n"),
     "",
@@ -123,7 +126,7 @@ export async function buildIndex(programs: string[], now: number): Promise<strin
   ].join("\n");
 }
 
-/** `/llms-full.txt` — the whole corpus, with each page's source URL above it. */
+/** `/llms-full.txt`  the whole corpus, with each page's source URL above it. */
 export async function buildFullText(
   programs: string[],
   now: number,
@@ -145,12 +148,16 @@ export async function buildFullText(
         ].join("\n"),
       );
 
-      return [programHeader(content, program, now), "", pages.join("\n\n")].join("\n");
+      return [
+        programHeader(content, program, now),
+        "",
+        pages.join("\n\n"),
+      ].join("\n");
     }),
   );
 
   return [
-    "# Hack Club program documentation — full text",
+    "# Hack Club program documentation  full text",
     "",
     `Generated ${new Date(now).toISOString()}. Pages are separated by "--- 8< ---".`,
     "",

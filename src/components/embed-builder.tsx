@@ -53,10 +53,13 @@ export function EmbedBuilder({
       <div className="embed-builder__controls panel">
         <label className="field">
           <span className="silkscreen">Page</span>
-          <select value={href} onChange={(event) => setHref(event.target.value)}>
+          <select
+            value={href}
+            onChange={(event) => setHref(event.target.value)}
+          >
             {targets.map((target) => (
               <option key={target.href} value={target.href}>
-                {target.program} — {target.title}
+                {target.program} {target.title}
               </option>
             ))}
           </select>
@@ -103,7 +106,12 @@ export function EmbedBuilder({
       <div className="embed-builder__preview panel">
         <div className="snippet__head">
           <span className="silkscreen">Preview</span>
-          <a className="btn btn-ghost" href={url} target="_blank" rel="noreferrer">
+          <a
+            className="btn btn-ghost"
+            href={url}
+            target="_blank"
+            rel="noreferrer"
+          >
             Open ↗
           </a>
         </div>

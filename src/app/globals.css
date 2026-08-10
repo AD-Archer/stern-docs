@@ -1,14 +1,14 @@
 @import "tailwindcss";
 
 /**
- * The look: rack equipment. CloudFall's subject is self-hosting — the things a
- * person builds instead of renting — so the docs are dressed as the front panel
+ * The look: rack equipment. CloudFALL's subject is self-hosting  the things a
+ * person builds instead of renting  so the docs are dressed as the front panel
  * of the machine they're building: silkscreened condensed labels, hairline
  * seams, milled 3px corners, and status LEDs that mean something (the lit port
  * is the page you're on; the lit strip is a round that's still open).
  *
  * Only the *structure* is fixed. Every color comes from --tokens generated per
- * program in lib/theme.ts, so the same panel reads as CloudFall purple here and
+ * program in lib/theme.ts, so the same panel reads as CloudFALL purple here and
  * as some other program's green next season without a line of CSS changing.
  */
 
@@ -85,7 +85,7 @@ body {
 
 /**
  * Silkscreen: the label printed next to a port. Used for eyebrows, section
- * headers and every readout. Condensed, spaced, small — the only uppercase in
+ * headers and every readout. Condensed, spaced, small  the only uppercase in
  * the design, so it always means "this is a label, not prose".
  */
 .silkscreen {
@@ -112,7 +112,7 @@ body {
   position: relative;
 }
 
-/* Milled top edge — one pixel of light so a panel looks like a part. */
+/* Milled top edge  one pixel of light so a panel looks like a part. */
 .panel::before {
   content: "";
   position: absolute;
@@ -131,7 +131,9 @@ body {
   border-radius: 50%;
   background: var(--led-off);
   flex: none;
-  transition: background 150ms ease, box-shadow 150ms ease;
+  transition:
+    background 150ms ease,
+    box-shadow 150ms ease;
 }
 
 .led-on {
@@ -169,7 +171,10 @@ body {
   text-transform: uppercase;
   padding: 0.5rem 0.85rem;
   border: 1px solid transparent;
-  transition: transform 120ms ease, background 120ms ease, border-color 120ms ease;
+  transition:
+    transform 120ms ease,
+    background 120ms ease,
+    border-color 120ms ease;
   white-space: nowrap;
 }
 
@@ -495,7 +500,7 @@ body {
 
 /**
  * Set before first paint by the inline script in the root layout, from the
- * ?embed=1 / ?nav=0 / ?banner=0 query — layouts can't read searchParams, and a
+ * ?embed=1 / ?nav=0 / ?banner=0 query  layouts can't read searchParams, and a
  * host page must never see a frame of full-site chrome inside its own header.
  */
 html[data-embed="1"] .site-only {
@@ -599,7 +604,7 @@ html[data-nav="0"] .site-bar {
 
 /**
  * One sticky bar, at every width. It replaced a full-width round-status banner
- * sitting above a separate docs title bar — two headers, only one of them sticky,
+ * sitting above a separate docs title bar  two headers, only one of them sticky,
  * which on a phone ate a third of the screen and read as a mistake. Identity on
  * the left, the round and the way in on the right, contents behind a labelled
  * button wherever the rail isn't already open.
@@ -694,7 +699,7 @@ html[data-nav="0"] .site-bar {
   flex: none;
 }
 
-/** How long is left — in the header, rather than in a banner of its own. */
+/** How long is left  in the header, rather than in a banner of its own. */
 .round-status {
   font-size: 0.75rem;
   font-weight: 500;
@@ -708,7 +713,7 @@ html[data-nav="0"] .site-bar {
 }
 
 /* Under 480px the header is already title + Join + Contents, so the countdown
-   steps aside — but "Round closed" stays, because with no join button there's
+   steps aside  but "Round closed" stays, because with no join button there's
    room for it, and it's the one thing a reader needs to know first. */
 @media (max-width: 479px) {
   .round-status--live {
@@ -759,7 +764,7 @@ html[data-nav="0"] .site-bar {
   .nav-rail {
     /* `inset` first, deliberately: it resets the fixed-position offsets from the
        phone sheet rule above, and setting it *after* `top` would reset `top` to
-       auto — which silently turns the sticky rail back into a scrolling one. */
+       auto  which silently turns the sticky rail back into a scrolling one. */
     inset: auto;
     display: flex;
     position: sticky;
@@ -781,7 +786,7 @@ html[data-nav="0"] .site-bar {
 }
 
 /* A port: LED, label, and a brand rail down the left edge when it's the one
-   you're on. Three signals for one state — colour is never doing this alone. */
+   you're on. Three signals for one state  colour is never doing this alone. */
 .port {
   display: flex;
   align-items: center;
@@ -791,7 +796,9 @@ html[data-nav="0"] .site-bar {
   border-left: 2px solid transparent;
   font-size: 0.875rem;
   color: var(--muted-foreground);
-  transition: background 120ms ease, color 120ms ease;
+  transition:
+    background 120ms ease,
+    color 120ms ease;
 }
 
 .port:hover {
@@ -885,7 +892,9 @@ html[data-nav="0"] .site-bar {
   background: var(--background);
   font-size: 0.82rem;
   color: var(--muted-foreground);
-  transition: border-color 120ms ease, color 120ms ease;
+  transition:
+    border-color 120ms ease,
+    color 120ms ease;
 }
 
 .search-trigger:hover {
@@ -1027,7 +1036,9 @@ html[data-nav="0"] .site-bar {
   padding: 0.85rem 1rem;
   border: 1px solid var(--hairline);
   border-radius: var(--radius-panel);
-  transition: border-color 120ms ease, background 120ms ease;
+  transition:
+    border-color 120ms ease,
+    background 120ms ease;
 }
 
 .pager-card:hover {
@@ -1081,7 +1092,9 @@ html[data-nav="0"] .site-bar {
   font-size: 0.78rem;
   line-height: 1.4;
   color: var(--muted-foreground);
-  transition: color 120ms ease, border-color 120ms ease;
+  transition:
+    color 120ms ease,
+    border-color 120ms ease;
 }
 
 .toc-link:hover {

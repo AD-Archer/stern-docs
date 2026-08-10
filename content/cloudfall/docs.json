@@ -1,6 +1,6 @@
 {
-  "title": "CloudFall docs",
-  "tagline": "Stop renting your own stuff",
+  "title": "CloudFALL docs",
+  "tagline": "Stop wasting money, build it yourself",
   "groups": [
     {
       "id": "start",
@@ -24,17 +24,17 @@
     }
   ],
   "join": {
-    "label": "Join CloudFall",
-    "blurb": "Build the open-source replacement for something you rent by the month, and get a server of your own to run it on."
+    "label": "Join CloudFALL",
+    "blurb": "Build the open-source replacement for a subscription, and get a server of your own to run it on."
   },
   "links": [
     {
-      "label": "cloudfall.hackclub.com",
+      "label": "CloudFALL.hackclub.com",
       "href": "https://cloudfall.hackclub.com"
     },
     {
-      "label": "#ysws-cloudfall on Slack",
-      "href": "https://hackclub.slack.com/channels/ysws-cloudfall"
+      "label": "#ysws-CloudFALL on Slack",
+      "href": "https://hackclub.slack.com/channels/ysws-CloudFALL"
     },
     {
       "label": "Hackatime",

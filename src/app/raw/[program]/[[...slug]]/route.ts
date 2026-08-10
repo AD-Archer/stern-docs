@@ -36,10 +36,10 @@ export async function GET(
   }
 
   // Frontmatter is stripped by the content layer, so the title and description
-  // are re-stated here as a comment — the body alone doesn't say what it is.
+  // are re-stated here as a comment  the body alone doesn't say what it is.
   const header = [
     `<!--`,
-    `${doc.title}${doc.description ? ` — ${doc.description}` : ""}`,
+    `${doc.title}${doc.description ? `  ${doc.description}` : ""}`,
     `Page: ${SITE_URL}${doc.href}`,
     `Source: ${doc.filePath}`,
     `-->`,

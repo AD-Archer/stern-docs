@@ -2,7 +2,7 @@
   "name": "stern-docs",
   "version": "0.1.0",
   "private": true,
-  "description": "Embeddable, PR-editable docs for Stern programs (CloudFall and friends).",
+  "description": "Embeddable, PR-editable docs for Stern programs (CloudFALL and friends).",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

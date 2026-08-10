@@ -1,13 +1,17 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { describeSchedule, parseDate, type ScheduleState } from "@/lib/schedule";
+import {
+  describeSchedule,
+  parseDate,
+  type ScheduleState,
+} from "@/lib/schedule";
 
 /**
  * The live version of the program schedule.
  *
  * `renderedAt` is the server's clock at render time, passed down as a prop so the
- * first client render is byte-identical to the HTML — no hydration mismatch. The
+ * first client render is byte-identical to the HTML  no hydration mismatch. The
  * effect then takes over on the real clock, which is what makes an ISR-cached
  * page stop advertising a round that closed while the page sat in the cache.
  */

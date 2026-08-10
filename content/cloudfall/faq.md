@@ -7,18 +7,18 @@ order: 1
 
 ## Do I need to own a server?
 
-No. An old laptop, a Raspberry Pi, or the desktop nobody uses is enough — see
+No. An old laptop, a Raspberry Pi, or the desktop nobody uses is enough see
 [Self-hosting basics](/cloudfall/self-hosting-basics). You can also develop
 against a hosted service and ship a container someone else can run.
 
 ## Can I work in a team?
 
-Ask in **#ysws-cloudfall** before you plan around it. Hours are tracked per
+Ask in **#ysws-CloudFALL** before you plan around it. Hours are tracked per
 person, so a team submission needs to be clear about who did what.
 
 ## Does installing an existing tool count?
 
-Not on its own — somebody already built Jellyfin. Build something around the
+Not on its own somebody already built Jellyfin. Build something around the
 problem: the missing client, the migration tool, the glue between services, or a
 subscription nobody has replaced yet.
 [Pick a project](/cloudfall/pick-a-project) goes into this.
@@ -26,7 +26,7 @@ subscription nobody has replaced yet.
 ## How much AI help can I use?
 
 At most 30% of the project, and you only get credit for hours you actually
-worked. It's checked.
+worked. It's checked. and No claude cannot share the hours it earned with you! 
 
 ## My hours are wrong / Hackatime stopped reporting
 
@@ -36,7 +36,7 @@ fixable at submission time.
 ## Can I submit something I started before the round?
 
 No. It has to be built new during this round, and you can't bring hours from a
-previous project or another YSWS.
+previous project or another YSWS. No double dipping
 
 ## What if my project is hardware?
 
@@ -46,8 +46,8 @@ documentation has to be good enough that someone else could build it.
 
 ## Does the round end at a specific time?
 
-The countdown in the header is the authority — it reads the program directly.
-When it runs out, submissions close.
+The countdown in the header is the authority it reads the program directly.
+When it runs out, submissions close, note some execptions may be made so you should always ask before assuming it's over.
 
 ## Something on this page is wrong
 

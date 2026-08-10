@@ -5,7 +5,7 @@ import { docOgImage } from "@/lib/og";
  * Share cards for individual doc pages.
  *
  * A route rather than an `opengraph-image.tsx` beside the page, because the doc
- * route is a catch-all (`[...slug]`) and Next won't allow a segment after one —
+ * route is a catch-all (`[...slug]`) and Next won't allow a segment after one
  * so the page's generateMetadata points at `/og?program=…&slug=…` instead.
  */
 export const revalidate = 3600;
