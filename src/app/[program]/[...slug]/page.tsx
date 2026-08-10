@@ -1,0 +1,60 @@
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+import { DocView } from "@/components/doc-view";
+import { findDoc, listPrograms, loadProgramContent } from "@/lib/content";
+
+export const revalidate = 300;
+
+type Params = { params: Promise<{ program: string; slug: string[] }> };
+
+export async function generateStaticParams() {
+  const programs = await listPrograms();
+  const params = await Promise.all(
+    programs.map(async (program) => {
+      const content = await loadProgramContent(program);
+      return (content?.docs ?? [])
+        .filter((doc) => doc.segments.length > 0)
+        .map((doc) => ({ program, slug: doc.segments }));
+    }),
+  );
+  return params.flat();
+}
+
+export async function generateMetadata({ params }: Params): Promise<Metadata> {
+  const { program, slug } = await params;
+  const content = await loadProgramContent(program);
+  const doc = content ? findDoc(content, slug) : null;
+  if (!content || !doc) return {};
+
+  const title = `${doc.title} · ${content.config.title}`;
+  const description = doc.description ?? undefined;
+  const image = `/og?program=${encodeURIComponent(program)}&slug=${encodeURIComponent(
+    slug.join("/"),
+  )}`;
+  return {
+    title,
+    description,
+    alternates: { canonical: doc.href },
+    openGraph: {
+      title,
+      description,
+      url: doc.href,
+      type: "article",
+      images: [{ url: image, width: 1200, height: 630, alt: doc.title }],
+    },
+    twitter: { card: "summary_large_image", images: [image] },
+  };
+}
+
+export default async function DocPage({ params }: Params) {
+  const { program, slug } = await params;
+  const content = await loadProgramContent(program);
+  if (!content) notFound();
+
+  const doc = findDoc(content, slug);
+  // Hidden docs are reachable by direct link on purpose — a draft can be shared
+  // for review without appearing in the nav — but they never show up in search.
+  if (!doc) notFound();
+
+  return <DocView content={content} doc={doc} />;
+}

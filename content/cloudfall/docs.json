@@ -1,0 +1,35 @@
+{
+  "title": "CloudFall docs",
+  "tagline": "Stop renting your own stuff",
+  "groups": [
+    {
+      "id": "start",
+      "label": "Start here",
+      "blurb": "Sign up, get your hours tracked, and pick something worth replacing."
+    },
+    {
+      "id": "build",
+      "label": "Build it",
+      "blurb": "The four things nobody tells you about running your own box."
+    },
+    {
+      "id": "ship",
+      "label": "Ship it",
+      "blurb": "What a submission needs, and what a reviewer looks at."
+    },
+    {
+      "id": "help",
+      "label": "When you're stuck",
+      "blurb": "Answers, and how to fix a page that's wrong."
+    }
+  ],
+  "join": {
+    "label": "Join CloudFall",
+    "blurb": "Build the open-source replacement for something you rent by the month, and get a server of your own to run it on."
+  },
+  "links": [
+    { "label": "cloudfall.hackclub.com", "href": "https://cloudfall.hackclub.com" },
+    { "label": "#ysws-cloudfall on Slack", "href": "https://hackclub.slack.com/channels/ysws-cloudfall" },
+    { "label": "Hackatime", "href": "https://hackatime.hackclub.com" }
+  ]
+}

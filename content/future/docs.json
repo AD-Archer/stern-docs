@@ -1,0 +1,35 @@
+{
+  "title": "Future docs",
+  "tagline": "Build the future of your childhood",
+  "groups": [
+    {
+      "id": "start",
+      "label": "Start here",
+      "blurb": "Get set up, then pick which future you're building from."
+    },
+    {
+      "id": "build",
+      "label": "Build it",
+      "blurb": "Making something that looks like it arrived from somewhere else."
+    },
+    {
+      "id": "ship",
+      "label": "Ship it",
+      "blurb": "The two hard rules, what reviewers check, and what your hours buy."
+    },
+    {
+      "id": "help",
+      "label": "When you're stuck",
+      "blurb": "Answers, and how to fix a page that's wrong."
+    }
+  ],
+  "join": {
+    "label": "Join Future",
+    "blurb": "Build the thing you thought the future would look like — a tool, a device, or a postcard from somewhere else — and get paid in hours you can spend."
+  },
+  "links": [
+    { "label": "future.hackclub.com", "href": "https://future.hackclub.com" },
+    { "label": "#future-ysws on Slack", "href": "https://hackclub.slack.com/channels/future-ysws" },
+    { "label": "Hackatime", "href": "https://hackatime.hackclub.com" }
+  ]
+}

@@ -1,0 +1,38 @@
+name: CI
+
+# Every docs pull request gets built. A typo in frontmatter, a `group` that
+# doesn't exist, or markdown that breaks the render should fail here rather than
+# on the live site — contributors editing a file on github.com can't run the
+# build themselves.
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - run: pnpm lint
+
+      - run: pnpm exec tsc --noEmit
+
+      # Palette extraction reaches out to the CDN and the program API; neither is
+      # required to build (both degrade to defaults), so a flaky network can't
+      # fail somebody's typo fix.
+      - run: pnpm build
+        env:
+          NEXT_PUBLIC_SITE_URL: https://example.com
