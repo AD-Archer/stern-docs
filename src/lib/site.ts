@@ -34,7 +34,7 @@ export const DEFAULT_PROGRAM =
  * clone still points somewhere real.
  */
 export const CONTENT_REPO =
-  process.env.NEXT_PUBLIC_CONTENT_REPO?.trim() || "AD-Archer/sterndocs";
+  process.env.NEXT_PUBLIC_CONTENT_REPO?.trim() || "AD-Archer/stern-docs";
 export const CONTENT_BRANCH =
   process.env.NEXT_PUBLIC_CONTENT_BRANCH?.trim() || "main";
 

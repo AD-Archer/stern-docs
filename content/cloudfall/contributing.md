@@ -8,7 +8,7 @@ order: 2
 If a page here is wrong, unclear, or missing the thing you spent an hour working
 out, you can fix it.
 
-These docs live in one public repo **[AD-Archer/sterndocs](https://github.com/AD-Archer/sterndocs)** alongside the docs
+These docs live in one public repo **[AD-Archer/stern-docs](https://github.com/AD-Archer/stern-docs)** alongside the docs
 for every other Archer program on Stern. It's markdown inside of a content folder.
 
 ## The fast way, from the browser
@@ -25,8 +25,8 @@ That's it. A maintainer reviews it, and when it merges the site updates itself.
 ## The local way
 
 ```bash
-git clone https://github.com/AD-Archer/sterndocs
-cd sterndocs
+git clone https://github.com/AD-Archer/stern-docs
+cd stern-docs
 pnpm install
 pnpm dev            # http://localhost:3000
 ```

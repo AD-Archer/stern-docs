@@ -38,7 +38,7 @@ Hardware counts, as long as it's useful to a homelab, even indirectly.
 ## These docs are editable
 
 Every page here is a markdown file in a public repo,
-[AD-Archer/sterndocs](https://github.com/AD-Archer/sterndocs). If something is wrong,
+[AD-Archer/stern-docs](https://github.com/AD-Archer/stern-docs). If something is wrong,
 out of date, or was confusing the first time you read it, use **Suggest an
 edit** at the bottom of the page it opens a pull request. That's the only way
 these docs change, which means the person who got stuck is the person who gets

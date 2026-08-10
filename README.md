@@ -2,7 +2,7 @@
 
 Embeddable documentation for participants in [Hack Club](https://hackclub.com)
 YSWS programs, living at
-[AD-Archer/sterndocs](https://github.com/AD-Archer/sterndocs). Markdown in, themed
+[AD-Archer/stern-docs](https://github.com/AD-Archer/stern-docs). Markdown in, themed
 docs site out with a live countdown and join button that read the program from
 stern and disappear when the round closes.
 
@@ -15,11 +15,9 @@ content/cloudfall/          →  docs.example.com/cloudfall
   index.md                     the docs home
   getting-started.md           /cloudfall/getting-started
   shipping/devlogs.md          /cloudfall/shipping/devlogs
-content/future/             →  docs.example.com/future
-  ...
 ```
 
-Two programs ship with the site today: **CloudFALL** and **Future**.
+Adding another program is a folder beside it — see [Adding a program](#adding-a-program).
 
 ## Run it
 
@@ -30,13 +28,13 @@ pnpm dev            # http://localhost:3000 → redirects to the default program
 
 No environment variables are needed for local development. For a deploy:
 
-| Variable                      | Why                                          | Default                                |
-| ----------------------------- | -------------------------------------------- | -------------------------------------- |
-| `NEXT_PUBLIC_SITE_URL`        | Canonical links, share cards, embed snippets | Vercel's URL, else localhost           |
-| `NEXT_PUBLIC_CONTENT_REPO`    | `owner/repo`, powers "Suggest an edit"       | `AD-Archer/sterndocs` set it on a fork |
-| `NEXT_PUBLIC_CONTENT_BRANCH`  | Branch edits target                          | `main`                                 |
-| `NEXT_PUBLIC_DEFAULT_PROGRAM` | Where `/` sends people                       | `CloudFALL`                            |
-| `STERN_API_BASE`              | Point at a stern instance                    | `https://stern.hackclub.com`           |
+| Variable                      | Why                                          | Default                                 |
+| ----------------------------- | -------------------------------------------- | --------------------------------------- |
+| `NEXT_PUBLIC_SITE_URL`        | Canonical links, share cards, embed snippets | Vercel's URL, else localhost            |
+| `NEXT_PUBLIC_CONTENT_REPO`    | `owner/repo`, powers "Suggest an edit"       | `AD-Archer/stern-docs` set it on a fork |
+| `NEXT_PUBLIC_CONTENT_BRANCH`  | Branch edits target                          | `main`                                  |
+| `NEXT_PUBLIC_DEFAULT_PROGRAM` | Where `/` sends people                       | `CloudFALL`                             |
+| `STERN_API_BASE`              | Point at a stern instance                    | `https://stern.hackclub.com`            |
 
 ## How it works
 

@@ -170,6 +170,9 @@ const processor = (headings: Heading[]) =>
       // One theme, because the site has one appearance. Backgrounds come from
       // our own --code-bg so a code block sits on the program's palette rather
       // than on GitHub's grey.
+      //
+      // (`shiki` is a direct dependency even though nothing here imports it: it's
+      // a required peer of rehype-pretty-code, which resolves the theme by name.)
       theme: "github-light",
       keepBackground: false,
       defaultLang: "text",
