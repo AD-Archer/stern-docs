@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { DocView } from "@/components/doc-view";
 import { findDoc, listPrograms, loadProgramContent } from "@/lib/content";
+import { rawUrl } from "@/lib/llms";
 
 export const revalidate = 300;
 
@@ -34,7 +35,12 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   return {
     title,
     description,
-    alternates: { canonical: doc.href },
+    alternates: {
+      canonical: doc.href,
+      // So a client that would rather have the source can find it without
+      // guessing the URL scheme.
+      types: { "text/markdown": rawUrl(program, slug) },
+    },
     openGraph: {
       title,
       description,

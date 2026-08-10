@@ -1,13 +1,15 @@
 ---
 title: Put these docs in your page
-description: One div and one script tag. The frame sizes itself and can follow your theme.
+description: One div and one script tag. The frame sizes itself to the content.
 group: help
 order: 3
 ---
 
 These docs are built to live inside other pages — the program's stern pages, the
-CloudFall site, anywhere. The [embed builder](/embed) generates the snippet for
-you with a live preview; this is the short version.
+CloudFall site, anywhere. The [embed builder](/embed) generates the snippet for you
+with a live preview; this is the short version. If you're looking for the
+machine-readable versions instead, see
+[Using these docs with an LLM](/cloudfall/llms).
 
 ## The snippet
 
@@ -23,7 +25,6 @@ Options go on the div:
 
 | Attribute | Effect |
 | --- | --- |
-| `data-theme="dark"` | Pin the appearance instead of following the reader's system, and hide the docs' own switch |
 | `data-nav="0"` | Hide the header and contents rail — for embedding a single page inside your own chrome |
 | `data-height="1200"` | Starting height, before the first size message arrives |
 
@@ -33,7 +34,7 @@ Any framework can skip `embed.js` — the parameters are just query string:
 
 ```html
 <iframe
-  src="https://docs.example.com/cloudfall?embed=1&theme=dark"
+  src="https://docs.example.com/cloudfall?embed=1"
   style="width:100%;height:900px;border:0"
   loading="lazy"
   title="CloudFall docs"
@@ -57,8 +58,9 @@ window.addEventListener("message", (event) => {
   second set of navigation.
 - The page background drops its own texture and sits on whatever surface you give
   it.
-- Everything else — search, the contents rail, the countdown and join button, the
-  theme — works exactly as it does standalone.
+- Everything else — search, the contents rail, the countdown and join button —
+  works exactly as it does standalone. The docs are light only, so there's no
+  appearance to coordinate.
 
 > [!NOTE]
 > Links that leave the docs open in a new tab rather than replacing the frame, so

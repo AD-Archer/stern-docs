@@ -383,21 +383,9 @@ body {
   display: grid; /* One row per line, so line highlighting can span the gutter. */
 }
 
-/* rehype-pretty-code emits both themes as inline vars; pick one per appearance
-   instead of re-highlighting on toggle. */
-.prose [data-theme="dark"],
-html.dark .prose code span {
-  color: var(--shiki-dark);
-}
-
-html:not(.dark) .prose code span {
+/* rehype-pretty-code puts the highlight colour in an inline variable. */
+.prose code span {
   color: var(--shiki-light);
-}
-
-@media (prefers-color-scheme: dark) {
-  html:not(.light) .prose code span {
-    color: var(--shiki-dark);
-  }
 }
 
 .prose figcaption[data-rehype-pretty-code-title] {
@@ -590,6 +578,23 @@ html[data-nav="0"] .site-bar {
   text-align: center;
 }
 
+.site-foot__text {
+  font-size: 0.8rem;
+  color: var(--muted-foreground);
+  margin: 0;
+}
+
+.site-foot__text a {
+  color: var(--foreground);
+  text-decoration: underline;
+  text-decoration-color: var(--brand);
+  text-underline-offset: 3px;
+}
+
+.site-foot__text a.tabular {
+  font-size: 0.95em;
+}
+
 /* ══ Header ════════════════════════════════════════════════════════════════ */
 
 /**
@@ -752,10 +757,13 @@ html[data-nav="0"] .site-bar {
 
 @media (min-width: 1024px) {
   .nav-rail {
+    /* `inset` first, deliberately: it resets the fixed-position offsets from the
+       phone sheet rule above, and setting it *after* `top` would reset `top` to
+       auto — which silently turns the sticky rail back into a scrolling one. */
+    inset: auto;
     display: flex;
     position: sticky;
     top: 4rem;
-    inset: auto;
     max-height: calc(100dvh - 5.5rem);
     overflow-y: auto;
     margin-top: 2.5rem;
@@ -809,34 +817,6 @@ html[data-nav="0"] .site-bar {
   margin-left: auto;
   font-size: 0.7rem;
   opacity: 0.6;
-}
-
-.rail-foot {
-  margin-top: auto;
-  padding-top: 0.5rem;
-}
-
-/**
- * The appearance switch reads its own label off <html data-theme-mode>, which the
- * boot script sets before first paint. Doing it in CSS rather than React state is
- * what lets the control be correct on the very first frame, with nothing to
- * hydrate and nothing to mismatch.
- */
-.appearance-toggle [data-mode] {
-  display: none;
-}
-
-html[data-theme-mode="auto"] .appearance-toggle [data-mode="auto"],
-html[data-theme-mode="light"] .appearance-toggle [data-mode="light"],
-html[data-theme-mode="dark"] .appearance-toggle [data-mode="dark"],
-html:not([data-theme-mode]) .appearance-toggle [data-mode="auto"] {
-  display: inline;
-}
-
-/* Pinned by the host with ?theme=… — the control would be overridden on the next
-   load, so it isn't offered. */
-html[data-theme-locked="1"] .appearance-toggle {
-  display: none;
 }
 
 /* ══ Join panel ════════════════════════════════════════════════════════════ */
@@ -1075,7 +1055,7 @@ html[data-theme-locked="1"] .appearance-toggle {
   .toc {
     display: block;
     position: sticky;
-    top: 5rem;
+    top: 4rem;
   }
 }
 

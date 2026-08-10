@@ -4,7 +4,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { AppearanceToggle } from "@/components/appearance-toggle";
 import { DocSearch, type SearchEntry } from "@/components/doc-search";
 
 export type RailDoc = { href: string; title: string };
@@ -157,10 +156,6 @@ export function DocsShell({
               </ul>
             </div>
           ) : null}
-
-          <div className="rail-foot">
-            <AppearanceToggle />
-          </div>
         </aside>
 
         <main className="shell__main">{children}</main>

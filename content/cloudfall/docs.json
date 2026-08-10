@@ -28,8 +28,26 @@
     "blurb": "Build the open-source replacement for something you rent by the month, and get a server of your own to run it on."
   },
   "links": [
-    { "label": "cloudfall.hackclub.com", "href": "https://cloudfall.hackclub.com" },
-    { "label": "#ysws-cloudfall on Slack", "href": "https://hackclub.slack.com/channels/ysws-cloudfall" },
-    { "label": "Hackatime", "href": "https://hackatime.hackclub.com" }
-  ]
+    {
+      "label": "cloudfall.hackclub.com",
+      "href": "https://cloudfall.hackclub.com"
+    },
+    {
+      "label": "#ysws-cloudfall on Slack",
+      "href": "https://hackclub.slack.com/channels/ysws-cloudfall"
+    },
+    {
+      "label": "Hackatime",
+      "href": "https://hackatime.hackclub.com"
+    },
+    {
+      "label": "Hack Club",
+      "href": "https://hackclub.com"
+    },
+    {
+      "label": "Docs source on GitHub",
+      "href": "https://github.com/AD-Archer/sterndocs"
+    }
+  ],
+  "repo": "AD-Archer/sterndocs"
 }

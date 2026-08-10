@@ -8,17 +8,19 @@
  * them agreeing even after either side changes its brand color.
  *
  * On top of that sit the tokens only the docs need — the panel/hairline/LED
- * language of the patch-panel sidebar and status strip. Those are derived from
- * the same seed hue, so a program's docs feel like its own equipment rather
- * than a grey chrome with a colored button in it.
+ * language of the sidebar and header. Those are derived from the same seed hue,
+ * so a program's docs feel like its own equipment rather than a grey chrome
+ * with a colored button in it.
+ *
+ * **Light only.** There is deliberately no dark variant and no appearance
+ * switch: one surface per program means one set of contrast decisions to get
+ * right, and an embed inherits its host's page rather than negotiating with it.
  *
  * Pure and deterministic: the server renders these into a <style> tag and
  * nothing recomputes them client-side.
  */
 
 import { clamp, hexToOklch, oklchToHex } from "@/lib/color";
-
-export type Appearance = "light" | "dark";
 
 /** What the extractor hands over: a primary brand color and a companion hue. */
 export type ThemeSeed = {
@@ -40,7 +42,7 @@ function oklch(l: number, c: number, h: number, a?: number): string {
   return a == null ? `oklch(${base})` : `oklch(${base} / ${a}%)`;
 }
 
-export function generateTokens(seed: ThemeSeed, appearance: Appearance): ThemeVars {
+export function generateTokens(seed: ThemeSeed): ThemeVars {
   const brand = hexToOklch(seed.brand);
   const second = hexToOklch(seed.secondary);
   const h = brand.h;
@@ -58,57 +60,14 @@ export function generateTokens(seed: ThemeSeed, appearance: Appearance): ThemeVa
   const primaryFg =
     accentL > 0.62 ? oklch(0.2, tint(0.02), h) : oklch(0.98, tint(0.008), h);
 
-  const dark = appearance === "dark";
-
-  const shared: ThemeVars = {
+  return {
     "--primary": primary,
     "--primary-foreground": primaryFg,
     "--ring": primary,
-    // Brand pair, kept raw for gradients, LEDs and glows.
+    // The brand pair, kept raw for the header seam, LEDs and glows.
     "--brand": oklch(accentL, accentC, h),
     "--brand-2": oklch(clamp(second.l, 0.5, 0.78), Math.max(second.c, 0.05), h2),
-  };
 
-  if (dark) {
-    return {
-      ...shared,
-      "--background": oklch(0.16, tint(0.02), h),
-      "--foreground": oklch(0.96, tint(0.012), h),
-      "--card": oklch(0.213, tint(0.024), h),
-      "--card-foreground": oklch(0.96, tint(0.012), h),
-      "--popover": oklch(0.213, tint(0.024), h),
-      "--popover-foreground": oklch(0.96, tint(0.012), h),
-      "--secondary": oklch(0.27, tint(0.03), h),
-      "--secondary-foreground": oklch(0.96, tint(0.012), h),
-      "--muted": oklch(0.27, tint(0.024), h),
-      "--muted-foreground": oklch(0.72, tint(0.02), h),
-      "--accent": oklch(0.32, tint(0.05), h),
-      "--accent-foreground": oklch(0.97, tint(0.012), h),
-      "--border": oklch(0.99, 0, h, 12),
-      "--input": oklch(0.99, 0, h, 15),
-
-      // ── Docs-only: the equipment language ──────────────────────────────────
-      /** Sidebar / strip chrome, a step darker than a card so panels read as fixtures. */
-      "--panel": oklch(0.185, tint(0.022), h),
-      /** Hairline between panels — brighter than --border, still not a line you look at. */
-      "--hairline": oklch(0.99, 0, h, 9),
-      /** Rack-unit grid over the page background. */
-      "--grid": oklch(0.99, 0, h, 3),
-      /** Top-edge highlight that makes a panel look milled rather than drawn. */
-      "--sheen": oklch(1, 0, h, 7),
-      /** Unlit port indicator. Never the only signal for state — labels bold too. */
-      "--led-off": oklch(0.42, tint(0.02), h),
-      "--led-glow": oklch(accentL, accentC, h, 45),
-      /** Tinted wash behind callouts and the active sidebar row. */
-      "--wash": oklch(accentL, accentC, h, 12),
-      "--code-bg": oklch(0.19, tint(0.02), h),
-      "--code-border": oklch(0.99, 0, h, 8),
-      "--shadow-panel": `0 1px 0 ${oklch(1, 0, h, 6)}, 0 12px 32px -18px ${oklch(0, 0, h, 70)}`,
-    };
-  }
-
-  return {
-    ...shared,
     "--background": oklch(0.975, tint(0.01), h),
     "--foreground": oklch(0.2, tint(0.024), h),
     "--card": oklch(0.995, tint(0.006), h),
@@ -137,47 +96,39 @@ export function generateTokens(seed: ThemeSeed, appearance: Appearance): ThemeVa
   };
 }
 
-/**
- * Serializes both appearances into one stylesheet. `:root` carries light, and
- * dark is applied by the `.dark` class next-themes puts on <html> — plus a
- * prefers-color-scheme fallback for the `system` case before hydration.
- */
+/** The program's palette as one `:root` block, inlined by the layout. */
 export function themeCss(seed: ThemeSeed): string {
-  const declare = (vars: ThemeVars) =>
-    Object.entries(vars)
-      .map(([key, value]) => `${key}:${value};`)
-      .join("");
-
-  const light = declare(generateTokens(seed, "light"));
-  const dark = declare(generateTokens(seed, "dark"));
-
-  return [
-    `:root{color-scheme:light;${light}}`,
-    `html.dark{color-scheme:dark;${dark}}`,
-    `@media (prefers-color-scheme:dark){html:not(.light){color-scheme:dark;${dark}}}`,
-  ].join("");
+  const declared = Object.entries(generateTokens(seed))
+    .map(([key, value]) => `${key}:${value};`)
+    .join("");
+  // color-scheme pins form controls and scrollbars to light too, so a reader
+  // whose OS is dark doesn't get a dark scrollbar on a light page.
+  return `:root{color-scheme:light;${declared}}`;
 }
 
 /**
  * Flat hex versions of the handful of colors the OG image needs. satori renders
  * with its own CSS subset and has no oklch() support, so the same seed is
  * resolved to sRGB here instead of being read from the page.
+ *
+ * Same lightness decisions as the page, so a share card looks like the thing it
+ * links to rather than a differently-themed poster for it.
  */
 export function ogColors(seed: ThemeSeed) {
   const brand = hexToOklch(seed.brand);
   const second = hexToOklch(seed.secondary);
-  const tint = Math.min(brand.c, 0.02);
+  const tint = (cap: number) => Math.min(brand.c, cap);
   return {
-    background: oklchToHex(0.16, tint, brand.h),
-    panel: oklchToHex(0.213, Math.min(brand.c, 0.024), brand.h),
-    foreground: oklchToHex(0.96, Math.min(brand.c, 0.012), brand.h),
-    muted: oklchToHex(0.72, Math.min(brand.c, 0.02), brand.h),
-    brand: oklchToHex(clamp(brand.l, 0.5, 0.75), Math.max(brand.c, 0.05), brand.h),
+    background: oklchToHex(0.975, tint(0.01), brand.h),
+    panel: oklchToHex(0.995, tint(0.006), brand.h),
+    foreground: oklchToHex(0.2, tint(0.024), brand.h),
+    muted: oklchToHex(0.46, tint(0.024), brand.h),
+    brand: oklchToHex(clamp(brand.l, 0.45, 0.72), Math.max(brand.c, 0.05), brand.h),
     brand2: oklchToHex(
       clamp(second.l, 0.5, 0.78),
       Math.max(second.c, 0.05),
       second.h,
     ),
-    hairline: oklchToHex(0.32, tint, brand.h),
+    hairline: oklchToHex(0.9, tint(0.02), brand.h),
   };
 }

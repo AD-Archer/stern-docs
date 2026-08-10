@@ -79,6 +79,37 @@ export default async function EmbedPage() {
       )}
 
       <section className="embed-page__notes prose">
+        <h2>Feeding the docs to an LLM</h2>
+        <p>
+          Every page is also plain markdown, so an agent — or a person pasting into
+          a chat — gets the source rather than a rendering.
+        </p>
+        <ul>
+          <li>
+            <a href="/llms.txt">
+              <code>/llms.txt</code>
+            </a>{" "}
+            — an index of every program and page, in the llmstxt.org shape, with a
+            generated line saying whether each round is still open.
+          </li>
+          <li>
+            <a href="/llms-full.txt">
+              <code>/llms-full.txt</code>
+            </a>{" "}
+            — the entire corpus in one response. Add{" "}
+            <code>?program=&lt;slug&gt;</code> for one program.
+          </li>
+          <li>
+            <code>/raw/&lt;program&gt;/&lt;page&gt;</code> — a single page&apos;s
+            markdown, which is what the <strong>Copy as Markdown</strong> button at
+            the foot of every page copies.
+          </li>
+        </ul>
+        <p>
+          All three are CORS-open and cached for five minutes, so scripts and
+          agents can fetch them directly.
+        </p>
+
         <h2>How it behaves in a frame</h2>
         <ul>
           <li>
@@ -88,9 +119,8 @@ export default async function EmbedPage() {
             its own.
           </li>
           <li>
-            <strong>The host owns the theme.</strong> <code>?theme=dark</code> or{" "}
-            <code>?theme=light</code> pins the appearance and hides the docs&apos;
-            own appearance switch.
+            <strong>One appearance.</strong> These docs are light only — no theme
+            to negotiate with your page, and no switch for a reader to get wrong.
           </li>
           <li>
             <strong>Self-sizing.</strong> The frame posts a{" "}

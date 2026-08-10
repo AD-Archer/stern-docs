@@ -11,7 +11,6 @@
  *   <script src="https://docs.example.com/embed.js" defer></script>
  *
  * Optional attributes on the div:
- *   data-theme="dark|light|auto"   pin the appearance to the host's
  *   data-nav="0"                   hide the header and contents rail
  *   data-height="1200"             starting height before the first message
  *
@@ -36,7 +35,7 @@
     }
 
     url.searchParams.set("embed", "1");
-    ["theme", "nav"].forEach(function (key) {
+    ["nav"].forEach(function (key) {
       var value = host.getAttribute("data-" + key);
       if (value) url.searchParams.set(key, value);
     });

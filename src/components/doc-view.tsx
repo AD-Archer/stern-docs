@@ -7,6 +7,7 @@ import {
   type Doc,
   type ProgramContent,
 } from "@/lib/content";
+import { rawUrl } from "@/lib/llms";
 import { renderMarkdown } from "@/lib/markdown";
 import { CONTENT_BRANCH, CONTENT_REPO, SITE_URL } from "@/lib/site";
 
@@ -48,7 +49,12 @@ export async function DocView({
 
         {children}
 
-        <PageActions canonicalUrl={`${SITE_URL}${doc.href}`} editUrl={edit} />
+        <PageActions
+          canonicalUrl={`${SITE_URL}${doc.href}`}
+          markdownUrl={rawUrl(content.program, doc.segments)}
+          markdown={doc.body}
+          editUrl={edit}
+        />
         <Pager previous={previous} next={next} />
       </article>
 

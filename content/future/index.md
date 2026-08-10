@@ -3,10 +3,12 @@ title: Future docs
 description: Build a project from the future of your childhood — how to get set up, what counts as futuristic, and what a submission needs.
 ---
 
-Everyone had a version of the future in their head as a kid. Clean skies and
-quiet machines. Neon rain and a rig that outruns theirs. Something rebuilt out of
-salvage after everything went wrong. Future is about building a real thing from
-whichever one was yours.
+Future is a Hack Club YSWS program — *you ship, we ship.*
+
+Everyone had a version of the future in their head as a kid. Clean skies and quiet
+machines. Neon rain and a rig that outruns theirs. Something rebuilt out of salvage
+after everything went wrong. Future is about building a real thing from whichever
+one was yours.
 
 These docs are the practical half: how to get set up, what "futuristic" actually
 has to mean for a reviewer, and what has to be true before a submission is
@@ -51,7 +53,8 @@ about futures.
 
 ## These docs are editable
 
-Every page here is a markdown file in a public repo. If something is wrong, out
-of date, or was confusing the first time you read it, use **Suggest an edit** at
-the bottom of the page — it opens a pull request.
+Every page here is a markdown file in a public repo,
+[AD-Archer/sterndocs](https://github.com/AD-Archer/sterndocs). If something is
+wrong, out of date, or was confusing the first time you read it, use **Suggest an
+edit** at the bottom of the page — it opens a pull request.
 [How to edit these docs](/future/contributing).

@@ -19,21 +19,18 @@ export function EmbedBuilder({
   targets: EmbedTarget[];
 }) {
   const [href, setHref] = useState(targets[0]?.href ?? "/");
-  const [theme, setTheme] = useState<"auto" | "light" | "dark">("auto");
   const [nav, setNav] = useState(true);
   const [copied, setCopied] = useState<string | null>(null);
 
   const url = useMemo(() => {
     const built = new URL(href, siteUrl);
     built.searchParams.set("embed", "1");
-    if (theme !== "auto") built.searchParams.set("theme", theme);
     if (!nav) built.searchParams.set("nav", "0");
     return built.toString();
-  }, [href, siteUrl, theme, nav]);
+  }, [href, siteUrl, nav]);
 
   const scriptSnippet = [
     `<div data-stern-docs="${new URL(href, siteUrl).toString()}"`,
-    theme !== "auto" ? ` data-theme="${theme}"` : "",
     !nav ? ` data-nav="0"` : "",
     `></div>`,
     `\n<script src="${siteUrl}/embed.js" defer></script>`,
@@ -62,20 +59,6 @@ export function EmbedBuilder({
                 {target.program} — {target.title}
               </option>
             ))}
-          </select>
-        </label>
-
-        <label className="field">
-          <span className="silkscreen">Appearance</span>
-          <select
-            value={theme}
-            onChange={(event) =>
-              setTheme(event.target.value as "auto" | "light" | "dark")
-            }
-          >
-            <option value="auto">Follow the reader&apos;s system</option>
-            <option value="light">Always light</option>
-            <option value="dark">Always dark</option>
           </select>
         </label>
 

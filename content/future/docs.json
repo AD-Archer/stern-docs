@@ -28,8 +28,26 @@
     "blurb": "Build the thing you thought the future would look like — a tool, a device, or a postcard from somewhere else — and get paid in hours you can spend."
   },
   "links": [
-    { "label": "future.hackclub.com", "href": "https://future.hackclub.com" },
-    { "label": "#future-ysws on Slack", "href": "https://hackclub.slack.com/channels/future-ysws" },
-    { "label": "Hackatime", "href": "https://hackatime.hackclub.com" }
-  ]
+    {
+      "label": "future.hackclub.com",
+      "href": "https://future.hackclub.com"
+    },
+    {
+      "label": "#future-ysws on Slack",
+      "href": "https://hackclub.slack.com/channels/future-ysws"
+    },
+    {
+      "label": "Hackatime",
+      "href": "https://hackatime.hackclub.com"
+    },
+    {
+      "label": "Hack Club",
+      "href": "https://hackclub.com"
+    },
+    {
+      "label": "Docs source on GitHub",
+      "href": "https://github.com/AD-Archer/sterndocs"
+    }
+  ],
+  "repo": "AD-Archer/sterndocs"
 }

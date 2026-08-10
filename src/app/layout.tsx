@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { IBM_Plex_Mono, IBM_Plex_Sans, IBM_Plex_Sans_Condensed } from "next/font/google";
 import { BOOT_SCRIPT } from "@/lib/boot-script";
-import { SITE_URL } from "@/lib/site";
+import { AUTHOR_NAME, AUTHOR_URL, SITE_URL } from "@/lib/site";
 import "./globals.css";
 
 /**
@@ -36,6 +36,8 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: { default: "Program docs", template: "%s" },
   description: "Documentation for Hack Club program participants.",
+  authors: [{ name: AUTHOR_NAME, url: AUTHOR_URL }],
+  creator: AUTHOR_NAME,
 };
 
 export default function RootLayout({

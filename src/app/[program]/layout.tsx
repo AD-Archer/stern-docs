@@ -9,7 +9,14 @@ import { plainText } from "@/lib/markdown";
 import { fetchProgram, joinUrl } from "@/lib/program";
 import { resolveThemeSeed } from "@/lib/seed";
 import { themeCss } from "@/lib/theme";
-import { STERN_API_BASE } from "@/lib/site";
+import {
+  AUTHOR_NAME,
+  AUTHOR_URL,
+  CONTENT_REPO,
+  CONTENT_REPO_URL,
+  HACK_CLUB_URL,
+  STERN_API_BASE,
+} from "@/lib/site";
 
 /**
  * The shell every docs page sits in: theme tokens, the header, the patch panel,
@@ -144,8 +151,23 @@ export default async function ProgramLayout({
       </DocsShell>
 
       <footer className="site-foot site-only">
-        <p className="silkscreen">
-          {content.config.title} · edited by pull request
+        {/* Whose program this is, who made the docs, and where to change them.
+            Not .silkscreen — that uppercases, which mangles a repo path and is
+            the wrong way to write a name. */}
+        <p className="site-foot__text">
+          A{" "}
+          <a href={HACK_CLUB_URL} target="_blank" rel="noreferrer">
+            Hack Club
+          </a>{" "}
+          program. Created by{" "}
+          <a href={AUTHOR_URL} target="_blank" rel="noreferrer">
+            {AUTHOR_NAME}
+          </a>
+          . Edit on{" "}
+          <a className="tabular" href={CONTENT_REPO_URL} target="_blank" rel="noreferrer">
+            {CONTENT_REPO}
+          </a>
+          .
         </p>
       </footer>
     </div>

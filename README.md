@@ -1,6 +1,8 @@
 # Stern program docs
 
-Embeddable documentation for Hack Club program participants. Markdown in, themed
+Embeddable documentation for participants in [Hack Club](https://hackclub.com)
+YSWS programs, living at
+[AD-Archer/sterndocs](https://github.com/AD-Archer/sterndocs). Markdown in, themed
 docs site out — with a live countdown and join button that read the program from
 stern and disappear when the round closes.
 
@@ -31,7 +33,7 @@ No environment variables are needed for local development. For a deploy:
 | Variable | Why | Default |
 | --- | --- | --- |
 | `NEXT_PUBLIC_SITE_URL` | Canonical links, share cards, embed snippets | Vercel's URL, else localhost |
-| `NEXT_PUBLIC_CONTENT_REPO` | `owner/repo`, powers "Suggest an edit" | none — the link is hidden |
+| `NEXT_PUBLIC_CONTENT_REPO` | `owner/repo`, powers "Suggest an edit" | `AD-Archer/sterndocs` — set it on a fork |
 | `NEXT_PUBLIC_CONTENT_BRANCH` | Branch edits target | `main` |
 | `NEXT_PUBLIC_DEFAULT_PROGRAM` | Where `/` sends people | `cloudfall` |
 | `STERN_API_BASE` | Point at a stern instance | `https://stern.hackclub.com` |
@@ -84,11 +86,13 @@ version:
 ```
 
 The frame reports its height on every layout change and `embed.js` applies it, so
-there's no fixed height and no nested scrollbar. `data-theme` and `data-nav`
-control appearance and whether the header plus contents rail appear at all; they
-map to `?embed=1&theme=…&nav=0`, which is read before first paint
-([`src/lib/boot-script.ts`](src/lib/boot-script.ts)) so a host page never sees a
-flash of full-site chrome.
+there's no fixed height and no nested scrollbar. `data-nav="0"` drops the header
+and contents rail for a host that has its own; it maps to `?embed=1&nav=0`, read
+before first paint ([`src/lib/boot-script.ts`](src/lib/boot-script.ts)) so a host
+page never sees a flash of full-site chrome.
+
+The site is **light only** — one surface per program, no appearance switch, and
+nothing to negotiate with a host page's theme.
 
 > [!NOTE]
 > Testing an embed from a `file://` page won't work — `frame-ancestors *` doesn't
@@ -116,6 +120,25 @@ export default async function DocsPage({ params }) {
 …and either ship the resize listener from `/embed`, or keep the fixed height if
 stern's own page is already the scroll container.
 
+## For LLMs and copy-paste
+
+Every page is available as its own markdown, so a model gets the source instead of
+a rendering ([`src/lib/llms.ts`](src/lib/llms.ts)):
+
+| URL | What it returns |
+| --- | --- |
+| `/llms.txt` | llmstxt.org-shaped index: every program, every page, one line each |
+| `/llms-full.txt` | The whole corpus in one response; `?program=<slug>` to narrow it |
+| `/raw/<program>/<page>` | One page's markdown, with a provenance comment on top |
+
+All three are `text/plain`-family, CORS-open, and revalidated every 5 minutes. The
+index and full-text responses carry a **generated status line** — open, closes on
+this date, or closed and archived — computed at request time, because the one thing
+a model must not do with these docs is invite someone into a round that has ended.
+
+In the UI, the same content is one click away: **Copy as Markdown** at the foot of
+every page copies that page's source, and **View source** opens `/raw/…`.
+
 ## Adding a program
 
 ```bash
@@ -129,7 +152,9 @@ the folder name plus stern's API.
 ## Editing content
 
 See [How to edit these docs](content/cloudfall/contributing.md) — it's a docs page
-because contributors need it more than maintainers do.
+because contributors need it more than maintainers do. Every page's footer and
+"Suggest an edit" button point back at this repo, so a reader who spots an error is
+two clicks from a pull request.
 
 ## Deploying
 

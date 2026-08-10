@@ -9,6 +9,11 @@ If a page here is wrong, unclear, or missing the thing you spent an hour working
 out, you can fix it. You don't need to be a maintainer and you don't need to
 clone anything.
 
+These docs live in one public repo — **[AD-Archer/sterndocs](https://github.com/AD-Archer/sterndocs)** — alongside the docs
+for every other Hack Club program on the same platform. It's markdown and a small
+Next.js site, nothing else, so a documentation fix never touches program
+infrastructure.
+
 ## The fast way, from the browser
 
 1. Scroll to the bottom of the page that's wrong.
@@ -23,14 +28,14 @@ That's it. A maintainer reviews it, and when it merges the site updates itself.
 ## The local way
 
 ```bash
-git clone https://github.com/<owner>/<repo>
-cd <repo>
+git clone https://github.com/AD-Archer/sterndocs
+cd sterndocs
 pnpm install
 pnpm dev            # http://localhost:3000
 ```
 
-Content lives under `content/<program>/`. Edit a `.md` file, save, and the page
-reloads.
+CloudFall's pages live in `content/cloudfall/`, and every other program has a
+folder beside it. Edit a `.md` file, save, and the page reloads.
 
 ## What a page looks like
 

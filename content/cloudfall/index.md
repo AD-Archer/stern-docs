@@ -3,10 +3,12 @@ title: CloudFall docs
 description: Everything you need to build an open-source replacement for something you currently rent by the month — and to get it accepted.
 ---
 
+CloudFall is a Hack Club YSWS program — *you ship, we ship.*
+
 You pay every month for things you could run yourself. Video, music, photos,
-backups, notes, the gym app that counts your reps. CloudFall is about building
-the replacement, shipping it open source, and ending up with a server of your
-own to run it on.
+backups, notes, the gym app that counts your reps. CloudFall is about building the
+replacement, shipping it open source, and ending up with a server of your own to
+run it on.
 
 These docs are the practical half of that: how to get set up, how to make the
 thing run somewhere a reviewer can reach it, and what has to be true before a
@@ -42,7 +44,8 @@ Hardware counts, as long as it's useful to a homelab, even indirectly.
 
 ## These docs are editable
 
-Every page here is a markdown file in a public repo. If something is wrong,
+Every page here is a markdown file in a public repo,
+[AD-Archer/sterndocs](https://github.com/AD-Archer/sterndocs). If something is wrong,
 out of date, or was confusing the first time you read it, use **Suggest an
 edit** at the bottom of the page — it opens a pull request. That's the only way
 these docs change, which means the person who got stuck is the person who gets

@@ -53,10 +53,14 @@ function remarkCallouts() {
       if (!match) return;
 
       const kind = match[1].toUpperCase();
-      // Anything after the marker on the same line is kept as body text.
-      const remainder = [match[2], ...lines.slice(1)].join("\n").trim();
-      leading.value = remainder;
-      if (remainder === "" && (first as Paragraph).children.length === 1) {
+      // Anything after the marker is kept as body text. Only the *leading*
+      // whitespace goes: this text node is often followed by inline markup
+      // ("… paste it in **#channel** and …"), and trimming its tail would weld
+      // the two words together.
+      const rest = [match[2], ...lines.slice(1)].join("\n").replace(/^[ \t]+/, "");
+      const soleChild = (first as Paragraph).children.length === 1;
+      leading.value = soleChild ? rest.trim() : rest;
+      if (leading.value === "" && soleChild) {
         node.children.shift();
       }
 
@@ -151,9 +155,10 @@ const processor = (headings: Heading[]) =>
       content: { type: "text", value: "#" },
     })
     .use(rehypePrettyCode, {
-      // Both themes emit inline CSS variables; globals.css swaps between them,
-      // so a theme toggle doesn't need a re-render or a second highlight pass.
-      theme: { light: "github-light", dark: "github-dark-dimmed" },
+      // One theme, because the site has one appearance. Backgrounds come from
+      // our own --code-bg so a code block sits on the program's palette rather
+      // than on GitHub's grey.
+      theme: "github-light",
       keepBackground: false,
       defaultLang: "text",
     })

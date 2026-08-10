@@ -8,6 +8,11 @@ order: 2
 If a page here is wrong, unclear, or missing the thing you spent an hour working
 out, you can fix it. No maintainer status needed, nothing to clone.
 
+These docs live in one public repo — **[AD-Archer/sterndocs](https://github.com/AD-Archer/sterndocs)** — alongside the docs
+for every other Hack Club program on the same platform. It's markdown and a small
+Next.js site, nothing else, so a documentation fix never touches program
+infrastructure.
+
 ## The fast way, from the browser
 
 1. Scroll to the bottom of the page that's wrong.
@@ -22,8 +27,8 @@ A maintainer reviews it, and when it merges the site updates itself.
 ## The local way
 
 ```bash
-git clone https://github.com/<owner>/<repo>
-cd <repo>
+git clone https://github.com/AD-Archer/sterndocs
+cd sterndocs
 pnpm install
 pnpm dev            # http://localhost:3000
 ```
