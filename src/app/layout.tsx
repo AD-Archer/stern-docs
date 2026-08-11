@@ -4,6 +4,7 @@ import {
   IBM_Plex_Sans,
   IBM_Plex_Sans_Condensed,
 } from "next/font/google";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { BOOT_SCRIPT } from "@/lib/boot-script";
 import { AUTHOR_NAME, AUTHOR_URL, SITE_URL } from "@/lib/site";
 import "./globals.css";
@@ -56,7 +57,10 @@ export default function RootLayout({
       <head>
         <script dangerouslySetInnerHTML={{ __html: BOOT_SCRIPT }} />
       </head>
-      <body>{children}</body>
+      <body>
+        {children}
+        <SpeedInsights />
+      </body>
     </html>
   );
 }
