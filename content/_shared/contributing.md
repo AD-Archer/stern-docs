@@ -31,8 +31,10 @@ pnpm install
 pnpm dev            # http://localhost:3000
 ```
 
-CloudFALL's pages live in `content/cloudfall/`, and every other program has a
-folder beside it. Edit a `.md` file, save, and the page reloads.
+Each program's pages live in `content/<program>/` CloudFALL's in
+`content/cloudfall/`, and every other program in a folder beside it. Pages that
+belong to no single program, like this one, live in `content/_shared/` and are
+served under every program. Edit a `.md` file, save, and the page reloads.
 
 ## What a page looks like
 
@@ -90,6 +92,8 @@ Tables, task lists, footnotes anything GitHub-flavoured markdown supports.
 - **Don't put dates or deadlines in prose.** They come from the program itself and
   show in the header and sidebar; a hardcoded date is a page that lies later.
 - **Keep it short.** If a page needs eight headings, it's probably two pages.
+- **Write it yourself.** Pages here are written by people who've done the thing.
+  Generated prose reads fine and says nothing, and it gets rejected.
 
 ## Adding a whole new program's docs
 

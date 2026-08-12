@@ -6,6 +6,7 @@ import {
 } from "next/font/google";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/next";
+import { Insight } from "@/components/insight";
 import { BOOT_SCRIPT } from "@/lib/boot-script";
 import { AUTHOR_NAME, AUTHOR_URL, SITE_URL } from "@/lib/site";
 import "./globals.css";
@@ -60,6 +61,7 @@ export default function RootLayout({
       </head>
       <body>
         {children}
+        <Insight />
         <Analytics />
         <SpeedInsights />
       </body>

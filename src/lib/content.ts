@@ -3,6 +3,8 @@
  * site with no database and no CMS.
  *
  *   content/
+ *     _shared/
+ *       contributing.md  ← appears under every program
  *     CloudFALL/
  *       docs.json        ← per-program config: title, section order, links
  *       index.md         ← the program's docs home
@@ -25,6 +27,22 @@ import path from "node:path";
 import matter from "gray-matter";
 
 const CONTENT_ROOT = path.join(process.cwd(), "content");
+
+/**
+ * Pages that belong to the repo rather than to any one program  how to edit a
+ * page, what the frontmatter fields mean. They're written once here and served
+ * under every program, because someone who finds a wrong port number is reading
+ * *a program's* docs and shouldn't have to leave them to fix it.
+ *
+ * The leading underscore keeps it out of `listPrograms`, so it never becomes a
+ * route of its own. A program that needs its own version of a shared page wins:
+ * the same path under `content/<program>/` overrides it.
+ */
+const SHARED_DIR = "_shared";
+
+/** `_shared` and dotfolders hold content but aren't programs. */
+const isProgramFolder = (name: string) =>
+  !name.startsWith(".") && !name.startsWith("_");
 
 export type DocsConfig = {
   /** Display title of this docs site, e.g. "CloudFALL docs". */
@@ -85,7 +103,7 @@ export async function listPrograms(): Promise<string[]> {
   try {
     const entries = await fs.readdir(CONTENT_ROOT, { withFileTypes: true });
     return entries
-      .filter((entry) => entry.isDirectory() && !entry.name.startsWith("."))
+      .filter((entry) => entry.isDirectory() && isProgramFolder(entry.name))
       .map((entry) => entry.name)
       .sort();
   } catch {
@@ -130,10 +148,18 @@ const titleize = (slug: string) =>
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
     .join(" ");
 
-function parseDoc(program: string, absolute: string, raw: string): Doc {
-  const relative = path
-    .relative(path.join(CONTENT_ROOT, program), absolute)
-    .split(path.sep);
+/**
+ * `program` decides the URL, `root` decides everything else  a shared page is
+ * routed under whichever program is being rendered, but its edit link has to
+ * point at the one file on disk that actually exists.
+ */
+function parseDoc(
+  program: string,
+  root: string,
+  absolute: string,
+  raw: string,
+): Doc {
+  const relative = path.relative(root, absolute).split(path.sep);
   const parsed = matter(raw);
   const data = parsed.data as Record<string, unknown>;
 
@@ -157,7 +183,9 @@ function parseDoc(program: string, absolute: string, raw: string): Doc {
     order: typeof data.order === "number" ? data.order : 999,
     hidden: data.hidden === true,
     body: parsed.content.trim(),
-    filePath: `content/${program}/${relative.join("/")}`,
+    filePath: ["content", ...path.relative(CONTENT_ROOT, absolute).split(path.sep)].join(
+      "/",
+    ),
   };
 }
 
@@ -170,9 +198,22 @@ export type ProgramContent = {
   flat: Doc[];
 };
 
+async function readDocs(
+  program: string,
+  root: string,
+  files: string[],
+): Promise<Doc[]> {
+  return Promise.all(
+    files.map(async (file) =>
+      parseDoc(program, root, file, await fs.readFile(file, "utf8")),
+    ),
+  );
+}
+
 export async function loadProgramContent(
   program: string,
 ): Promise<ProgramContent | null> {
+  if (!isProgramFolder(program)) return null;
   const dir = path.join(CONTENT_ROOT, program);
   // Guard against `..` in a route segment reaching the filesystem.
   if (path.relative(CONTENT_ROOT, dir) !== program) return null;
@@ -186,11 +227,23 @@ export async function loadProgramContent(
   if (files.length === 0) return null;
 
   const config = await readConfig(program);
-  const docs = await Promise.all(
-    files.map(async (file) =>
-      parseDoc(program, file, await fs.readFile(file, "utf8")),
-    ),
+  const own = await readDocs(program, dir, files);
+
+  // Shared pages are optional and always lose to a program's own file at the
+  // same path, so a program can replace one without the folder knowing.
+  const sharedRoot = path.join(CONTENT_ROOT, SHARED_DIR);
+  let sharedFiles: string[] = [];
+  try {
+    sharedFiles = await walk(sharedRoot);
+  } catch {
+    sharedFiles = [];
+  }
+  const taken = new Set(own.map((doc) => doc.segments.join("/")));
+  const shared = (await readDocs(program, sharedRoot, sharedFiles)).filter(
+    (doc) => !taken.has(doc.segments.join("/")),
   );
+
+  const docs = [...own, ...shared];
 
   const visible = docs.filter((doc) => !doc.hidden);
   const byOrder = (a: Doc, b: Doc) =>

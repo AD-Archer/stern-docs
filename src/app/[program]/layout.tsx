@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { DocsShell } from "@/components/docs-shell";
 import { EmbedBridge } from "@/components/embed-bridge";
+import { Insight } from "@/components/insight";
 import { JoinPanel } from "@/components/join-panel";
 import { RoundStatus } from "@/components/round-status";
 import { loadProgramContent, listPrograms } from "@/lib/content";
@@ -96,6 +97,8 @@ export default async function ProgramLayout({
       {/* Generated per program from its own artwork  see lib/seed.ts. */}
       <style dangerouslySetInnerHTML={{ __html: themeCss(seed) }} />
       <EmbedBridge />
+      {/* Tags every event with the program whose docs are being read. */}
+      <Insight program={slug} />
 
       {/* Header + contents rail + the page. The shell owns both because the
           header spans the viewport while the rail is a column inside it. */}

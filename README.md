@@ -6,11 +6,8 @@ YSWS programs, living at
 docs site out with a live countdown and join button that read the program from
 stern and disappear when the round closes.
 
-Built for [CloudFALL](https://cloudfall.hackclub.com), but nothing here is
-CloudFALL-specific: a program is a folder under `content/`.
-
 ```
-content/cloudfall/          →  docs.example.com/cloudfall
+content/cloudfall/          →  https://sterndocs.hackclub.com/cloudfall
   docs.json                    site config: title, sections, links
   index.md                     the docs home
   getting-started.md           /cloudfall/getting-started
@@ -26,15 +23,7 @@ pnpm install
 pnpm dev            # http://localhost:3000 → redirects to the default program
 ```
 
-No environment variables are needed for local development. For a deploy:
-
-| Variable                      | Why                                          | Default                                 |
-| ----------------------------- | -------------------------------------------- | --------------------------------------- |
-| `NEXT_PUBLIC_SITE_URL`        | Canonical links, share cards, embed snippets | Vercel's URL, else localhost            |
-| `NEXT_PUBLIC_CONTENT_REPO`    | `owner/repo`, powers "Suggest an edit"       | `AD-Archer/stern-docs` set it on a fork |
-| `NEXT_PUBLIC_CONTENT_BRANCH`  | Branch edits target                          | `main`                                  |
-| `NEXT_PUBLIC_DEFAULT_PROGRAM` | Where `/` sends people                       | `CloudFALL`                             |
-| `STERN_API_BASE`              | Point at a stern instance                    | `https://stern.hackclub.com`            |
+No environment variables are needed for local development.
 
 ## How it works
 
@@ -63,11 +52,6 @@ gives blue ones. That one hex generates every token on the page using the same
 OKLCH formulas stern uses, which is what makes framed docs look native inside
 stern ([`src/lib/theme.ts`](src/lib/theme.ts)).
 
-The program's artwork still does work: the logo and background are downsampled,
-converted to OKLCH, binned by hue and scored on prevalence × vividness, and the
-strongest hue at least 40° from the accent becomes the _companion_ color used by
-the header seam and LED glow ([`src/lib/image-colors.ts`](src/lib/image-colors.ts)).
-CloudFALL's amber logo is where its seam gets its amber.
 
 Precedence: `theme.brand` in `docs.json` → `accentColor` → artwork → Hack Club red
 ([`src/lib/seed.ts`](src/lib/seed.ts)). A program that would rather be themed from
@@ -149,13 +133,7 @@ the folder name plus stern's API.
 
 ## Editing content
 
-See [How to edit these docs](content/cloudfall/contributing.md) it's a docs page
+See [How to edit these docs](content/_shared/contributing.md) it's a docs page
 because contributors need it more than maintainers do. Every page's footer and
 "Suggest an edit" button point back at this repo, so a reader who spots an error is
 two clicks from a pull request.
-
-## Deploying
-
-Vercel with zero config. `sharp` is used for palette extraction and is imported
-lazily: a host that can't load it loses the artwork-derived colors and falls back
-to `accentColor`, rather than failing to build.
