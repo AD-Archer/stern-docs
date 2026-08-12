@@ -59,7 +59,13 @@ async function extractSwatches(url: string): Promise<Swatch[]> {
   let channels: number;
   try {
     const response = await fetch(url, {
-      cache: "no-store",
+      // Not `no-store`: an uncached fetch during a static render turns the whole
+      // page dynamic ("changed from static to dynamic at runtime"), and losing
+      // ISR on every docs page to a colour lookup is a bad trade. Artwork is
+      // immutable in practice, so a long revalidate costs nothing. Anything over
+      // Next's 2MB entry limit simply isn't persisted, which is fine  the map
+      // above is what actually keeps this off the network.
+      next: { revalidate: TTL_MS / 1000 },
       signal: AbortSignal.timeout(8000),
     });
     if (!response.ok) return [];
